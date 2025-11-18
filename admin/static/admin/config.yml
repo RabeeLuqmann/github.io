@@ -1,18 +1,19 @@
+yaml
 backend:
   name: github
   repo: RabeeLuqmann/rabeeluqmann.github.io
   branch: main
 
-media_folder: "static/images"
+media_folder: "images"
 public_folder: "/images"
 
 collections:
   - name: "pages"
     label: "Pages"
     files:
-      - name: "home"
+      - name: "index"
         label: "Home Page"
-        file: "index.md"
+        file: "index.html"
         fields:
           - { name: "title", label: "Title", widget: "string" }
-          - { name: "body", label: "Body", widget: "markdown" }
+          - { name: "body", label: "Content", widget: "markdown" }
