@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rabeè Luqmann - Author</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -18,6 +19,7 @@
             color: #333;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
+            padding-top: 70px; /* Space for fixed header */
         }
 
         .container {
@@ -28,6 +30,95 @@
 
         /* Header */
         header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 20px 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8em;
+            color: #2c3e50;
+            font-weight: bold;
+        }
+
+        /* Three-dot menu */
+        .menu-container {
+            position: relative;
+        }
+
+        .menu-toggle {
+            background: none;
+            border: none;
+            font-size: 1.5em;
+            cursor: pointer;
+            color: #2c3e50;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        .menu-toggle:hover {
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            padding: 10px 0;
+            min-width: 200px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1001;
+        }
+
+        .dropdown-menu.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 12px 20px;
+            text-decoration: none;
+            color: #2c3e50;
+            transition: background 0.3s;
+        }
+
+        .dropdown-menu a:hover {
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        .dropdown-menu a i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+
+        /* Hero Section */
+        .hero {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             padding: 60px 0;
@@ -99,6 +190,7 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             border: 1px solid #e8e8e8;
+            position: relative;
         }
 
         .book-card:hover {
@@ -152,6 +244,42 @@
         .kindle-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 10px 20px rgba(231, 76, 60, 0.3);
+        }
+
+        /* Book Actions */
+        .book-actions {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .book-action-btn {
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .book-action-btn:hover {
+            background: white;
+            transform: scale(1.1);
+        }
+
+        .edit-btn {
+            color: #3498db;
+        }
+
+        .delete-btn {
+            color: #e74c3c;
         }
 
         /* Add Book Form */
@@ -252,6 +380,7 @@
             justify-content: center;
             gap: 20px;
             margin-top: 20px;
+            flex-wrap: wrap;
         }
 
         .social-link {
@@ -278,6 +407,54 @@
             margin-top: 50px;
         }
 
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8em;
+            color: #2c3e50;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5em;
+            cursor: pointer;
+            color: #7f8c8d;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             h1 {
@@ -295,17 +472,46 @@
             .form-grid {
                 grid-template-columns: 1fr;
             }
+            
+            .social-links {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .social-link {
+                width: 100%;
+                text-align: center;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Header with Menu -->
+    <header>
+        <div class="header-content">
+            <div class="logo">Rabeè Luqmann</div>
+            <div class="menu-container">
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-ellipsis-v"></i>
+                </button>
+                <div class="dropdown-menu" id="dropdownMenu">
+                    <a href="#about"><i class="fas fa-user"></i> About</a>
+                    <a href="#books"><i class="fas fa-book"></i> Books</a>
+                    <a href="#contact"><i class="fas fa-envelope"></i> Contact</a>
+                    <a href="#social"><i class="fas fa-share-alt"></i> Social</a>
+                    <a href="#" id="exportBooks"><i class="fas fa-download"></i> Export Books</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
     <div class="container">
-        <!-- Header Section -->
-        <header>
+        <!-- Hero Section -->
+        <section class="hero">
             <div class="author-image">RL</div>
             <h1>Rabeè Luqmann</h1>
             <p class="tagline">Author • Storyteller • Explorer of the Human Heart</p>
-        </header>
+        </section>
 
         <!-- About Section -->
         <section id="about">
@@ -321,29 +527,7 @@
         <section id="books">
             <h2>Published Works</h2>
             <div class="books-grid" id="booksGrid">
-                <!-- Book 1 -->
-                <div class="book-card">
-                    <div class="book-cover">Bound by Destiny</div>
-                    <h3 class="book-title">Bound by Destiny</h3>
-                    <p class="book-description">A poignant portrayal of arranged marriage in India, blending tradition with modernity.</p>
-                    <a href="https://www.amazon.com/dp/YOUR_BOOK_ID" class="kindle-btn" target="_blank">Get on Kindle</a>
-                </div>
-
-                <!-- Book 2 -->
-                <div class="book-card">
-                    <div class="book-cover">Endorphin</div>
-                    <h3 class="book-title">Endorphin: The Ache of Wanting</h3>
-                    <p class="book-description">A raw, lyrical narrative exploring longing, addiction, and obsessive emotion.</p>
-                    <a href="https://www.amazon.com/dp/YOUR_BOOK_ID" class="kindle-btn" target="_blank">Get on Kindle</a>
-                </div>
-
-                <!-- Book 3 -->
-                <div class="book-card">
-                    <div class="book-cover">The Daughter</div>
-                    <h3 class="book-title">The Daughter Who Was Not Named</h3>
-                    <p class="book-description">A bold exploration of the dark heart of human relationships and identity.</p>
-                    <a href="https://www.amazon.com/dp/YOUR_BOOK_ID" class="kindle-btn" target="_blank">Get on Kindle</a>
-                </div>
+                <!-- Books will be dynamically added here -->
             </div>
 
             <!-- Add New Book Form -->
@@ -411,40 +595,274 @@
         </section>
     </div>
 
+    <!-- Edit Book Modal -->
+    <div class="modal" id="editBookModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Edit Book</h3>
+                <button class="close-modal" id="closeEditModal">&times;</button>
+            </div>
+            <form id="editBookForm">
+                <input type="hidden" id="editBookId">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="editBookTitle">Book Title</label>
+                        <input type="text" id="editBookTitle" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editBookColor">Cover Color</label>
+                        <select id="editBookColor">
+                            <option value="#3498db,#9b59b6">Blue/Purple</option>
+                            <option value="#e74c3c,#c0392b">Red</option>
+                            <option value="#27ae60,#2ecc71">Green</option>
+                            <option value="#f39c12,#e67e22">Orange</option>
+                            <option value="#9b59b6,#8e44ad">Purple</option>
+                        </select>
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="editBookDescription">Book Description</label>
+                        <textarea id="editBookDescription" required></textarea>
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="editBookLink">Amazon Kindle Link</label>
+                        <input type="url" id="editBookLink" placeholder="https://www.amazon.com/dp/BOOK_ID" required>
+                    </div>
+                </div>
+                <button type="submit" class="add-btn">Update Book</button>
+            </form>
+        </div>
+    </div>
+
     <footer>
         <p>&copy; 2024 Rabeè Luqmann. All rights reserved.</p>
     </footer>
 
     <script>
-        // Add Book Functionality
-        document.getElementById('addBookForm').addEventListener('submit', function(e) {
+        // Book management functionality
+        let books = [
+            {
+                id: 1,
+                title: "Bound by Destiny",
+                description: "A poignant portrayal of arranged marriage in India, blending tradition with modernity.",
+                link: "https://www.amazon.com/dp/YOUR_BOOK_ID",
+                color: "#3498db,#9b59b6"
+            },
+            {
+                id: 2,
+                title: "Endorphin: The Ache of Wanting",
+                description: "A raw, lyrical narrative exploring longing, addiction, and obsessive emotion.",
+                link: "https://www.amazon.com/dp/YOUR_BOOK_ID",
+                color: "#e74c3c,#c0392b"
+            },
+            {
+                id: 3,
+                title: "The Daughter Who Was Not Named",
+                description: "A bold exploration of the dark heart of human relationships and identity.",
+                link: "https://www.amazon.com/dp/YOUR_BOOK_ID",
+                color: "#27ae60,#2ecc71"
+            }
+        ];
+
+        let nextBookId = 4;
+
+        // DOM Elements
+        const booksGrid = document.getElementById('booksGrid');
+        const addBookForm = document.getElementById('addBookForm');
+        const editBookForm = document.getElementById('editBookForm');
+        const editBookModal = document.getElementById('editBookModal');
+        const closeEditModal = document.getElementById('closeEditModal');
+        const menuToggle = document.getElementById('menuToggle');
+        const dropdownMenu = document.getElementById('dropdownMenu');
+        const exportBooksBtn = document.getElementById('exportBooks');
+
+        // Initialize books display
+        function renderBooks() {
+            booksGrid.innerHTML = '';
+            
+            books.forEach(book => {
+                const bookCard = document.createElement('div');
+                bookCard.className = 'book-card';
+                bookCard.innerHTML = `
+                    <div class="book-actions">
+                        <button class="book-action-btn edit-btn" data-id="${book.id}">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="book-action-btn delete-btn" data-id="${book.id}">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                    <div class="book-cover" style="background: linear-gradient(45deg, ${book.color})">${book.title}</div>
+                    <h3 class="book-title">${book.title}</h3>
+                    <p class="book-description">${book.description}</p>
+                    <a href="${book.link}" class="kindle-btn" target="_blank">Get on Kindle</a>
+                `;
+                
+                booksGrid.appendChild(bookCard);
+            });
+            
+            // Add event listeners to action buttons
+            document.querySelectorAll('.edit-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const bookId = parseInt(e.currentTarget.getAttribute('data-id'));
+                    openEditModal(bookId);
+                });
+            });
+            
+            document.querySelectorAll('.delete-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const bookId = parseInt(e.currentTarget.getAttribute('data-id'));
+                    deleteBook(bookId);
+                });
+            });
+        }
+
+        // Add new book
+        addBookForm.addEventListener('submit', function(e) {
             e.preventDefault();
             
-            // Get form values
             const title = document.getElementById('bookTitle').value;
             const description = document.getElementById('bookDescription').value;
             const link = document.getElementById('bookLink').value;
             const color = document.getElementById('bookColor').value;
             
-            // Create new book card
-            const bookCard = document.createElement('div');
-            bookCard.className = 'book-card';
-            bookCard.innerHTML = `
-                <div class="book-cover" style="background: linear-gradient(45deg, ${color})">${title}</div>
-                <h3 class="book-title">${title}</h3>
-                <p class="book-description">${description}</p>
-                <a href="${link}" class="kindle-btn" target="_blank">Get on Kindle</a>
-            `;
+            const newBook = {
+                id: nextBookId++,
+                title,
+                description,
+                link,
+                color
+            };
             
-            // Add to books grid
-            document.getElementById('booksGrid').appendChild(bookCard);
-            
-            // Reset form
-            document.getElementById('addBookForm').reset();
+            books.push(newBook);
+            renderBooks();
+            addBookForm.reset();
             
             // Show success message
             alert('Book added successfully!');
         });
+
+        // Open edit modal
+        function openEditModal(bookId) {
+            const book = books.find(b => b.id === bookId);
+            
+            if (book) {
+                document.getElementById('editBookId').value = book.id;
+                document.getElementById('editBookTitle').value = book.title;
+                document.getElementById('editBookDescription').value = book.description;
+                document.getElementById('editBookLink').value = book.link;
+                document.getElementById('editBookColor').value = book.color;
+                
+                editBookModal.classList.add('active');
+            }
+        }
+
+        // Update book
+        editBookForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const bookId = parseInt(document.getElementById('editBookId').value);
+            const title = document.getElementById('editBookTitle').value;
+            const description = document.getElementById('editBookDescription').value;
+            const link = document.getElementById('editBookLink').value;
+            const color = document.getElementById('editBookColor').value;
+            
+            const bookIndex = books.findIndex(b => b.id === bookId);
+            
+            if (bookIndex !== -1) {
+                books[bookIndex] = {
+                    id: bookId,
+                    title,
+                    description,
+                    link,
+                    color
+                };
+                
+                renderBooks();
+                editBookModal.classList.remove('active');
+                
+                // Show success message
+                alert('Book updated successfully!');
+            }
+        });
+
+        // Delete book
+        function deleteBook(bookId) {
+            if (confirm('Are you sure you want to delete this book?')) {
+                books = books.filter(b => b.id !== bookId);
+                renderBooks();
+                
+                // Show success message
+                alert('Book deleted successfully!');
+            }
+        }
+
+        // Close edit modal
+        closeEditModal.addEventListener('click', function() {
+            editBookModal.classList.remove('active');
+        });
+
+        // Close modal when clicking outside
+        window.addEventListener('click', function(e) {
+            if (e.target === editBookModal) {
+                editBookModal.classList.remove('active');
+            }
+        });
+
+        // Three-dot menu functionality
+        menuToggle.addEventListener('click', function() {
+            dropdownMenu.classList.toggle('active');
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!menuToggle.contains(e.target) && !dropdownMenu.contains(e.target)) {
+                dropdownMenu.classList.remove('active');
+            }
+        });
+
+        // Export books functionality
+        exportBooksBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const dataStr = JSON.stringify(books, null, 2);
+            const dataBlob = new Blob([dataStr], {type: 'application/json'});
+            
+            const url = URL.createObjectURL(dataBlob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'rabeeluqmann_books.json';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+            
+            // Show success message
+            alert('Books exported successfully!');
+        });
+
+        // Smooth scrolling for menu links
+        document.querySelectorAll('.dropdown-menu a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                if (this.getAttribute('href').startsWith('#')) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                        
+                        // Close menu after clicking
+                        dropdownMenu.classList.remove('active');
+                    }
+                }
+            });
+        });
+
+        // Initialize the page
+        renderBooks();
     </script>
 </body>
 </html>
