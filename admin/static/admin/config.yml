@@ -7,12 +7,19 @@ media_folder: "images"
 public_folder: "/images"
 
 collections:
-  - name: "pages"
-    label: "Pages"
-    files:
-      - name: "index"
-        label: "Home Page"
-        file: "index.html"
+  - name: "books"
+    label: "Books"
+    folder: "content/books"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Cover Image", name: "cover", widget: "image" }
+      - { label: "Description", name: "description", widget: "text" }
+      - label: "Purchase Links"
+        name: "links"
+        widget: "object"
         fields:
-          - { name: "title", label: "Title", widget: "string" }
-          - { name: "body", label: "Content", widget: "markdown" }
+          - { label: "Amazon", name: "amazon", widget: "string", required: false }
+          - { label: "Other Store", name: "other", widget: "string", required: false }
+      - { label: "Featured", name: "featured", widget: "boolean", default: false }
