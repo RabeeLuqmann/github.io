@@ -128,7 +128,7 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         }
 
-        h1 {
+        .author-name {
             color: var(--dark);
             margin-bottom: 15px;
             font-size: 3rem;
@@ -268,6 +268,30 @@
         .buy-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(231, 112, 85, 0.4);
+        }
+
+        /* Contact Info */
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            background: rgba(108, 92, 231, 0.1);
+            border-radius: 10px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .contact-item i {
+            color: var(--primary);
+            font-size: 1.2rem;
+            width: 30px;
         }
 
         /* Admin Panel */
@@ -431,6 +455,10 @@
             background: linear-gradient(45deg, #ff9900, #ff6b00);
         }
 
+        .social-icon.goodreads {
+            background: linear-gradient(45deg, #553b08, #8b6b33);
+        }
+
         /* Footer */
         footer {
             text-align: center;
@@ -442,18 +470,32 @@
             border-radius: 20px 20px 0 0;
         }
 
-        /* Colorful Animations */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        /* Edit buttons */
+        .edit-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(108, 92, 231, 0.1);
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            opacity: 0;
         }
 
-        .section {
-            animation: fadeIn 0.6s ease-out;
+        .section:hover .edit-btn {
+            opacity: 1;
         }
 
-        .book-card {
-            animation: fadeIn 0.6s ease-out;
+        .edit-btn:hover {
+            background: var(--primary);
+            color: white;
         }
 
         /* Responsive */
@@ -467,7 +509,7 @@
                 grid-template-columns: 1fr;
             }
             
-            h1 {
+            .author-name {
                 font-size: 2.2rem;
             }
             
@@ -478,44 +520,10 @@
             .social-links {
                 gap: 15px;
             }
-        }
-
-        /* Loading Animation */
-        .loading {
-            text-align: center;
-            padding: 40px;
-            color: var(--primary);
-        }
-
-        .loading::after {
-            content: '...';
-            animation: dots 1.5s steps(4, end) infinite;
-        }
-
-        @keyframes dots {
-            0%, 20% { content: '.'; }
-            40% { content: '..'; }
-            60%, 100% { content: '...'; }
-        }
-
-        /* Colorful Badges */
-        .badge {
-            display: inline-block;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-            margin-left: 10px;
-        }
-
-        .badge-new {
-            background: linear-gradient(45deg, var(--success), #00cec9);
-            color: white;
-        }
-
-        .badge-featured {
-            background: linear-gradient(45deg, var(--warning), #fdcb6e);
-            color: var(--dark);
+            
+            .edit-btn {
+                opacity: 1;
+            }
         }
     </style>
 </head>
@@ -525,7 +533,7 @@
         <div class="header-content">
             <div class="logo">Rabee Luqmann</div>
             <button class="admin-btn" id="adminBtn">
-                <i class="fas fa-magic"></i> Manage Website
+                <i class="fas fa-tools"></i> Edit Everything
             </button>
         </div>
     </header>
@@ -536,30 +544,32 @@
         <section class="hero">
             <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop" 
                  alt="Rabee Luqmann" class="profile-pic" id="profilePic">
-            <h1>Rabee Luqmann</h1>
-            <p class="tagline">Author • Storyteller • Explorer of Hearts</p>
-            <div class="social-links">
-                <a href="#" class="social-icon twitter"><i class="fab fa-twitter"></i></a>
-                <a href="#" class="social-icon instagram"><i class="fab fa-instagram"></i></a>
-                <a href="#" class="social-icon amazon"><i class="fab fa-amazon"></i></a>
-                <a href="#" class="social-icon"><i class="fab fa-goodreads"></i></a>
+            <h1 class="author-name" id="authorName">Rabee Luqmann</h1>
+            <p class="tagline" id="tagline">Author • Storyteller • Explorer of Hearts</p>
+            <div class="social-links" id="socialLinks">
+                <!-- Social links will be loaded here -->
             </div>
         </section>
 
         <!-- About Section -->
         <section class="section" id="about">
+            <button class="edit-btn" onclick="editAbout()">
+                <i class="fas fa-edit"></i>
+            </button>
             <h2>About Me</h2>
-            <p style="font-size: 1.1rem; line-height: 1.8; color: #555;">
-                I am <strong style="color: var(--primary);">Rabee Luqmann</strong>, a passionate author who crafts stories that touch the deepest corners of the human heart. My journey in literature is fueled by a desire to explore love, longing, and the complex tapestry of human emotions across diverse cultures.
-            </p>
-            <p style="margin-top: 20px; font-size: 1.1rem; line-height: 1.8; color: #555;">
-                Each book is a new adventure, a new exploration of what makes us human. From the traditional landscapes of India in "Bound by Destiny" to the raw emotional depths in "Endorphin," my writing invites readers on journeys they won't soon forget.
-            </p>
+            <div id="aboutContent">
+                <p style="font-size: 1.1rem; line-height: 1.8; color: #555;">
+                    I am <strong style="color: var(--primary);">Rabee Luqmann</strong>, a passionate author who crafts stories that touch the deepest corners of the human heart. My journey in literature is fueled by a desire to explore love, longing, and the complex tapestry of human emotions across diverse cultures.
+                </p>
+                <p style="margin-top: 20px; font-size: 1.1rem; line-height: 1.8; color: #555;">
+                    Each book is a new adventure, a new exploration of what makes us human. From the traditional landscapes of India in "Bound by Destiny" to the raw emotional depths in "Endorphin," my writing invites readers on journeys they won't soon forget.
+                </p>
+            </div>
         </section>
 
         <!-- Books Section -->
         <section class="section" id="books">
-            <h2>My Books <span class="badge badge-new">New</span></h2>
+            <h2>My Books</h2>
             <div id="booksContainer" class="books-grid">
                 <!-- Books will be loaded here -->
             </div>
@@ -567,16 +577,19 @@
 
         <!-- Contact Section -->
         <section class="section" id="contact">
+            <button class="edit-btn" onclick="editContact()">
+                <i class="fas fa-edit"></i>
+            </button>
             <h2>Let's Connect</h2>
-            <div style="background: linear-gradient(135deg, rgba(108, 92, 231, 0.1), rgba(253, 121, 168, 0.1)); padding: 30px; border-radius: 15px;">
-                <p style="font-size: 1.2rem; margin-bottom: 20px; color: var(--primary);">
-                    <i class="fas fa-envelope" style="margin-right: 10px;"></i>
-                    contact@rabeeluqmann.com
-                </p>
-                <p style="font-size: 1.2rem; color: var(--primary);">
-                    <i class="fas fa-phone" style="margin-right: 10px;"></i>
-                    +1 (555) 123-4567
-                </p>
+            <div class="contact-info" id="contactInfo">
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <span id="emailText">contact@rabeeluqmann.com</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <span id="phoneText">+1 (555) 123-4567</span>
+                </div>
             </div>
         </section>
     </div>
@@ -584,24 +597,91 @@
     <!-- Admin Panel -->
     <div class="admin-panel" id="adminPanel">
         <button class="close-admin" id="closeAdmin">
-            <i class="fas fa-times"></i> Close Panel
+            <i class="fas fa-times"></i> Close Editor
         </button>
         
-        <!-- Profile Photo Update -->
         <div class="admin-section">
-            <h3><i class="fas fa-user-circle" style="color: var(--accent);"></i> Update Your Photo</h3>
+            <h3><i class="fas fa-user-edit"></i> Edit Your Profile</h3>
+            
+            <!-- Author Name -->
             <div class="form-group">
-                <label><i class="fas fa-camera"></i> Choose Profile Photo</label>
+                <label>Your Name</label>
+                <input type="text" id="editAuthorName" value="Rabee Luqmann">
+            </div>
+            
+            <!-- Tagline -->
+            <div class="form-group">
+                <label>Tagline</label>
+                <input type="text" id="editTagline" value="Author • Storyteller • Explorer of Hearts">
+            </div>
+            
+            <!-- Profile Photo -->
+            <div class="form-group">
+                <label>Profile Photo</label>
                 <input type="file" id="profilePhotoInput" accept="image/*">
             </div>
             <button class="form-btn" onclick="updateProfilePhoto()">
-                <i class="fas fa-cloud-upload-alt"></i> Upload New Photo
+                <i class="fas fa-upload"></i> Update Photo
+            </button>
+        </div>
+
+        <!-- Edit About Section -->
+        <div class="admin-section">
+            <h3><i class="fas fa-book-open"></i> Edit About Section</h3>
+            <div class="form-group">
+                <label>About Text</label>
+                <textarea id="editAboutText">I am Rabee Luqmann, a passionate author who crafts stories that touch the deepest corners of the human heart. My journey in literature is fueled by a desire to explore love, longing, and the complex tapestry of human emotions across diverse cultures.
+
+Each book is a new adventure, a new exploration of what makes us human. From the traditional landscapes of India in "Bound by Destiny" to the raw emotional depths in "Endorphin," my writing invites readers on journeys they won't soon forget.</textarea>
+            </div>
+            <button class="form-btn" onclick="saveAbout()">
+                <i class="fas fa-save"></i> Save About Text
+            </button>
+        </div>
+
+        <!-- Edit Contact Info -->
+        <div class="admin-section">
+            <h3><i class="fas fa-address-book"></i> Edit Contact Info</h3>
+            <div class="form-group">
+                <label>Email Address</label>
+                <input type="email" id="editEmail" value="contact@rabeeluqmann.com">
+            </div>
+            <div class="form-group">
+                <label>Phone Number</label>
+                <input type="text" id="editPhone" value="+1 (555) 123-4567">
+            </div>
+            <button class="form-btn" onclick="saveContact()">
+                <i class="fas fa-save"></i> Save Contact Info
+            </button>
+        </div>
+
+        <!-- Edit Social Links -->
+        <div class="admin-section">
+            <h3><i class="fas fa-share-alt"></i> Edit Social Links</h3>
+            <div class="form-group">
+                <label>Twitter URL</label>
+                <input type="url" id="editTwitter" placeholder="https://twitter.com/yourusername">
+            </div>
+            <div class="form-group">
+                <label>Instagram URL</label>
+                <input type="url" id="editInstagram" placeholder="https://instagram.com/yourusername">
+            </div>
+            <div class="form-group">
+                <label>Amazon Author Page</label>
+                <input type="url" id="editAmazon" placeholder="https://amazon.com/author/yourname">
+            </div>
+            <div class="form-group">
+                <label>Goodreads URL</label>
+                <input type="url" id="editGoodreads" placeholder="https://goodreads.com/author/yourname">
+            </div>
+            <button class="form-btn" onclick="saveSocialLinks()">
+                <i class="fas fa-save"></i> Save Social Links
             </button>
         </div>
 
         <!-- Add New Book -->
         <div class="admin-section">
-            <h3><i class="fas fa-book-medical" style="color: var(--success);"></i> Publish New Book</h3>
+            <h3><i class="fas fa-book-medical"></i> Add New Book</h3>
             <div class="form-group">
                 <label>Book Title</label>
                 <input type="text" id="newBookTitle" placeholder="Enter the book title...">
@@ -619,13 +699,13 @@
                 <input type="url" id="newBookLink" placeholder="https://amazon.com/dp/...">
             </div>
             <button class="form-btn" onclick="addNewBook()">
-                <i class="fas fa-plus-circle"></i> Add to Collection
+                <i class="fas fa-plus-circle"></i> Add Book
             </button>
         </div>
 
         <!-- Manage Existing Books -->
         <div class="admin-section">
-            <h3><i class="fas fa-edit" style="color: var(--warning);"></i> Manage Books</h3>
+            <h3><i class="fas fa-edit"></i> Manage Books</h3>
             <div id="adminBooksList">
                 <!-- Books will be listed here -->
             </div>
@@ -633,117 +713,198 @@
 
         <!-- Backup & Restore -->
         <div class="admin-section">
-            <h3><i class="fas fa-shield-alt" style="color: var(--primary);"></i> Data Safety</h3>
-            <p style="color: #666; margin-bottom: 20px; font-size: 0.9rem;">
-                <i class="fas fa-info-circle"></i> Save all your data to a file. Keep it safe!
-            </p>
+            <h3><i class="fas fa-database"></i> Data Management</h3>
             <button class="form-btn" onclick="exportData()">
                 <i class="fas fa-download"></i> Backup Everything
             </button>
             
             <div class="form-group" style="margin-top: 20px;">
-                <label><i class="fas fa-upload"></i> Restore from Backup</label>
+                <label>Restore from Backup</label>
                 <input type="file" id="importFile" accept=".json">
             </div>
             <button class="form-btn" onclick="importData()" style="background: linear-gradient(45deg, var(--primary), var(--secondary));">
-                <i class="fas fa-redo"></i> Restore Data
+                <i class="fas fa-upload"></i> Restore Backup
             </button>
         </div>
     </div>
 
     <footer>
         <p style="font-size: 1.1rem; margin-bottom: 10px;">© 2024 Rabee Luqmann. All stories preserved.</p>
-        <p style="opacity: 0.8;">Crafted with passion • Updated with love</p>
+        <p style="opacity: 0.8;">Edit anything anytime with the Edit Everything button</p>
     </footer>
 
     <script>
-        // Colorful Book Management System
-        // NO PASSWORD - Instant access!
+        // Complete Website Editor
+        // You can edit EVERYTHING!
 
-        // Sample books data with colorful details
-        let books = [
-            {
-                id: 1,
-                title: "Bound by Destiny",
-                description: "A poignant portrayal of arranged marriage in India, blending tradition with modernity. A story of love, duty, and self-discovery.",
-                cover: "https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400&h=600&fit=crop",
-                link: "https://amazon.com",
-                date: "2023",
-                featured: true
+        // Load all data from localStorage or use defaults
+        let websiteData = {
+            // Profile
+            authorName: "Rabee Luqmann",
+            tagline: "Author • Storyteller • Explorer of Hearts",
+            profilePhoto: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop",
+            
+            // About
+            aboutText: `I am Rabee Luqmann, a passionate author who crafts stories that touch the deepest corners of the human heart. My journey in literature is fueled by a desire to explore love, longing, and the complex tapestry of human emotions across diverse cultures.
+
+Each book is a new adventure, a new exploration of what makes us human. From the traditional landscapes of India in "Bound by Destiny" to the raw emotional depths in "Endorphin," my writing invites readers on journeys they won't soon forget.`,
+            
+            // Contact
+            email: "contact@rabeeluqmann.com",
+            phone: "+1 (555) 123-4567",
+            
+            // Social Links
+            socialLinks: {
+                twitter: "",
+                instagram: "",
+                amazon: "",
+                goodreads: ""
             },
-            {
-                id: 2,
-                title: "Endorphin: The Ache of Wanting",
-                description: "A raw, lyrical narrative exploring longing, addiction, and obsessive emotion. Dive into the depths of human desire.",
-                cover: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=600&fit=crop",
-                link: "https://amazon.com",
-                date: "2024",
-                featured: true
-            }
-        ];
+            
+            // Books
+            books: [
+                {
+                    id: 1,
+                    title: "Bound by Destiny",
+                    description: "A poignant portrayal of arranged marriage in India, blending tradition with modernity. A story of love, duty, and self-discovery.",
+                    cover: "https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400&h=600&fit=crop",
+                    link: "https://amazon.com",
+                    date: "2023",
+                    featured: true
+                },
+                {
+                    id: 2,
+                    title: "Endorphin: The Ache of Wanting",
+                    description: "A raw, lyrical narrative exploring longing, addiction, and obsessive emotion. Dive into the depths of human desire.",
+                    cover: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=600&fit=crop",
+                    link: "https://amazon.com",
+                    date: "2024",
+                    featured: true
+                }
+            ]
+        };
 
         // DOM Elements
         const adminBtn = document.getElementById('adminBtn');
         const adminPanel = document.getElementById('adminPanel');
         const closeAdmin = document.getElementById('closeAdmin');
-        const booksContainer = document.getElementById('booksContainer');
-        const profilePic = document.getElementById('profilePic');
 
-        // Load saved data when page starts
+        // Load everything when page starts
         document.addEventListener('DOMContentLoaded', function() {
-            loadBooks();
-            loadProfilePhoto();
-            loadAdminBooks();
-            
-            // Add some animation on load
-            setTimeout(() => {
-                document.querySelectorAll('.book-card').forEach((card, index) => {
-                    card.style.animationDelay = `${index * 0.1}s`;
-                });
-            }, 100);
+            loadWebsiteData();
+            populateAdminForms();
         });
 
-        // Show/Hide Admin Panel - INSTANT ACCESS!
+        // Show/Hide Admin Panel
         adminBtn.addEventListener('click', function() {
             adminPanel.classList.add('active');
-            adminBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Opening...';
-            setTimeout(() => {
-                adminBtn.innerHTML = '<i class="fas fa-magic"></i> Manage Website';
-            }, 400);
+            populateAdminForms();
         });
 
         closeAdmin.addEventListener('click', function() {
             adminPanel.classList.remove('active');
         });
 
-        // Load and display books for visitors
-        function loadBooks() {
-            // Try to load from browser storage first
-            const savedBooks = localStorage.getItem('rabeeluqmann_books');
-            if (savedBooks) {
-                books = JSON.parse(savedBooks);
+        // Load all website data
+        function loadWebsiteData() {
+            // Try to load from localStorage
+            const savedData = localStorage.getItem('rabeeluqmann_website_data');
+            if (savedData) {
+                websiteData = JSON.parse(savedData);
             }
             
-            // Display books
-            booksContainer.innerHTML = '';
+            // Update the page with loaded data
+            updateWebsiteDisplay();
+        }
+
+        // Update the entire website display
+        function updateWebsiteDisplay() {
+            // Profile
+            document.getElementById('authorName').textContent = websiteData.authorName;
+            document.getElementById('tagline').textContent = websiteData.tagline;
+            document.getElementById('profilePic').src = websiteData.profilePhoto;
+            
+            // About
+            document.getElementById('aboutContent').innerHTML = 
+                websiteData.aboutText.split('\n\n').map(paragraph => 
+                    `<p style="font-size: 1.1rem; line-height: 1.8; color: #555; margin-top: 20px;">${paragraph}</p>`
+                ).join('');
+            
+            // Contact
+            document.getElementById('emailText').textContent = websiteData.email;
+            document.getElementById('phoneText').textContent = websiteData.phone;
+            
+            // Social Links
+            updateSocialLinks();
+            
+            // Books
+            loadBooks();
+            loadAdminBooks();
+        }
+
+        // Update social links
+        function updateSocialLinks() {
+            const socialLinksContainer = document.getElementById('socialLinks');
+            const links = websiteData.socialLinks;
+            
+            socialLinksContainer.innerHTML = '';
+            
+            if (links.twitter) {
+                socialLinksContainer.innerHTML += `
+                    <a href="${links.twitter}" target="_blank" class="social-icon twitter">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                `;
+            }
+            
+            if (links.instagram) {
+                socialLinksContainer.innerHTML += `
+                    <a href="${links.instagram}" target="_blank" class="social-icon instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                `;
+            }
+            
+            if (links.amazon) {
+                socialLinksContainer.innerHTML += `
+                    <a href="${links.amazon}" target="_blank" class="social-icon amazon">
+                        <i class="fab fa-amazon"></i>
+                    </a>
+                `;
+            }
+            
+            if (links.goodreads) {
+                socialLinksContainer.innerHTML += `
+                    <a href="${links.goodreads}" target="_blank" class="social-icon goodreads">
+                        <i class="fab fa-goodreads"></i>
+                    </a>
+                `;
+            }
+        }
+
+        // Load books for visitors
+        function loadBooks() {
+            const booksContainer = document.getElementById('booksContainer');
+            const books = websiteData.books;
             
             if (books.length === 0) {
                 booksContainer.innerHTML = `
-                    <div style="text-align: center; padding: 60px; color: #666;">
+                    <div style="text-align: center; padding: 60px; color: #666; grid-column: 1 / -1;">
                         <i class="fas fa-book-open" style="font-size: 3rem; color: var(--primary); margin-bottom: 20px; opacity: 0.5;"></i>
                         <h3 style="color: var(--primary); margin-bottom: 10px;">No Books Yet</h3>
-                        <p>Your literary journey begins here! Add your first book using the Manage Website panel.</p>
+                        <p>Your literary journey begins here! Add your first book using the Edit Everything panel.</p>
                     </div>
                 `;
                 return;
             }
             
+            booksContainer.innerHTML = '';
+            
             books.forEach((book, index) => {
                 const bookCard = document.createElement('div');
                 bookCard.className = 'book-card';
-                bookCard.style.animationDelay = `${index * 0.1}s`;
                 bookCard.innerHTML = `
-                    ${book.featured ? '<div class="badge badge-featured" style="position: absolute; top: 15px; right: 15px;"><i class="fas fa-star"></i> Featured</div>' : ''}
+                    ${book.featured ? '<div style="position: absolute; top: 15px; right: 15px; background: var(--warning); color: var(--dark); padding: 5px 12px; border-radius: 20px; font-size: 12px; font-weight: 600;"><i class="fas fa-star"></i> Featured</div>' : ''}
                     <img src="${book.cover}" alt="${book.title}" class="book-cover"
                          onerror="this.src='https://images.unsplash.com/photo-1541963463532-d68292c34b19?w=400&h=600&fit=crop&text=${book.title}'">
                     <h3 class="book-title">${book.title}</h3>
@@ -758,6 +919,7 @@
         // Load books for admin panel
         function loadAdminBooks() {
             const adminBooksList = document.getElementById('adminBooksList');
+            const books = websiteData.books;
             
             if (books.length === 0) {
                 adminBooksList.innerHTML = `
@@ -793,187 +955,4 @@
                     </div>
                 `;
                 adminBooksList.appendChild(bookItem);
-            });
-        }
-
-        // Update profile photo
-        function updateProfilePhoto() {
-            const fileInput = document.getElementById('profilePhotoInput');
-            const file = fileInput.files[0];
-            
-            if (!file) {
-                alert('📸 Please select a photo first!');
-                return;
-            }
-            
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                // Save to browser storage
-                localStorage.setItem('rabeeluqmann_profile', e.target.result);
-                
-                // Update on page
-                profilePic.src = e.target.result;
-                
-                // Show success message
-                showMessage('✅ Profile photo updated successfully!', 'success');
-                fileInput.value = '';
-            };
-            reader.readAsDataURL(file);
-        }
-
-        // Load profile photo
-        function loadProfilePhoto() {
-            const savedPhoto = localStorage.getItem('rabeeluqmann_profile');
-            if (savedPhoto) {
-                profilePic.src = savedPhoto;
-            }
-        }
-
-        // Add new book
-        function addNewBook() {
-            const title = document.getElementById('newBookTitle').value.trim();
-            const description = document.getElementById('newBookDescription').value.trim();
-            const link = document.getElementById('newBookLink').value.trim();
-            const fileInput = document.getElementById('newBookCover');
-            
-            if (!title || !description) {
-                alert('📖 Please fill in both title and description!');
-                return;
-            }
-            
-            const newBook = {
-                id: Date.now(),
-                title: title,
-                description: description,
-                link: link || 'https://amazon.com',
-                cover: 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400&h=600&fit=crop',
-                date: new Date().getFullYear().toString(),
-                featured: true
-            };
-            
-            // If user uploaded a cover image
-            if (fileInput.files[0]) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    newBook.cover = e.target.result;
-                    saveAndDisplayBook(newBook);
-                };
-                reader.readAsDataURL(fileInput.files[0]);
-            } else {
-                saveAndDisplayBook(newBook);
-            }
-        }
-
-        function saveAndDisplayBook(book) {
-            // Add to books array
-            books.push(book);
-            
-            // Save to browser storage
-            localStorage.setItem('rabeeluqmann_books', JSON.stringify(books));
-            
-            // Update display
-            loadBooks();
-            loadAdminBooks();
-            
-            // Clear form
-            document.getElementById('newBookTitle').value = '';
-            document.getElementById('newBookDescription').value = '';
-            document.getElementById('newBookLink').value = '';
-            document.getElementById('newBookCover').value = '';
-            
-            // Show success message
-            showMessage('🎉 Book added to your collection!', 'success');
-            
-            // Close admin panel
-            setTimeout(() => {
-                adminPanel.classList.remove('active');
-            }, 1500);
-        }
-
-        // Delete a book
-        function deleteBook(index) {
-            if (confirm(`Are you sure you want to delete "${books[index].title}"?`)) {
-                const deletedBook = books.splice(index, 1);
-                
-                // Save to browser storage
-                localStorage.setItem('rabeeluqmann_books', JSON.stringify(books));
-                
-                // Update display
-                loadBooks();
-                loadAdminBooks();
-                
-                // Show message
-                showMessage(`🗑️ "${deletedBook[0].title}" has been removed.`, 'warning');
-            }
-        }
-
-        // Export all data
-        function exportData() {
-            const data = {
-                profilePhoto: localStorage.getItem('rabeeluqmann_profile'),
-                books: books,
-                exportedAt: new Date().toLocaleString(),
-                website: "Rabee Luqmann Author Website"
-            };
-            
-            const dataStr = JSON.stringify(data, null, 2);
-            const dataBlob = new Blob([dataStr], { type: 'application/json' });
-            
-            // Create download link
-            const link = document.createElement('a');
-            link.href = URL.createObjectURL(dataBlob);
-            const dateStr = new Date().toISOString().split('T')[0];
-            link.download = `rabeeluqmann_backup_${dateStr}.json`;
-            link.click();
-            
-            showMessage('💾 Backup downloaded! Keep this file safe.', 'success');
-        }
-
-        // Import data
-        function importData() {
-            const fileInput = document.getElementById('importFile');
-            const file = fileInput.files[0];
-            
-            if (!file) {
-                alert('📁 Please select a backup file first!');
-                return;
-            }
-            
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                try {
-                    const data = JSON.parse(e.target.result);
-                    
-                    // Import books
-                    if (data.books) {
-                        books = data.books;
-                        localStorage.setItem('rabeeluqmann_books', JSON.stringify(books));
-                    }
-                    
-                    // Import profile photo
-                    if (data.profilePhoto) {
-                        localStorage.setItem('rabeeluqmann_profile', data.profilePhoto);
-                        profilePic.src = data.profilePhoto;
-                    }
-                    
-                    // Update display
-                    loadBooks();
-                    loadAdminBooks();
-                    
-                    showMessage('🔄 Backup restored successfully!', 'success');
-                    fileInput.value = '';
-                    
-                } catch (error) {
-                    showMessage('❌ Invalid backup file. Please select the correct file.', 'error');
-                }
-            };
-            reader.readAsText(file);
-        }
-
-        // Show message
-        function showMessage(text, type) {
-            // Remove existing message
-            const existingMsg = document.querySelector('.message-popup');
-            if (existingMsg) existingMsg.remove();
-            
-            // Create message element
+           
