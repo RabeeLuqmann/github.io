@@ -1,0 +1,25 @@
+{
+  "profilePhoto": "https://via.placeholder.com/150",
+  "social": {
+    "twitter": "#",
+    "facebook": "#",
+    "instagram": "#",
+    "amazon": "#"
+  },
+  "books": [
+    {
+      "id": 1,
+      "title": "Bound by Destiny",
+      "description": "A story about love and destiny",
+      "cover": "https://via.placeholder.com/150x200",
+      "link": "#"
+    },
+    {
+      "id": 2,
+      "title": "Endorphin",
+      "description": "Exploring the ache of wanting",
+      "cover": "https://via.placeholder.com/150x200",
+      "link": "#"
+    }
+  ]
+}
