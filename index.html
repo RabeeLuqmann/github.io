@@ -6,7 +6,7 @@
     <title>Rabee Luqmann - Author</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Simple Reset */
+        /* Colorful Reset */
         * {
             margin: 0;
             padding: 0;
@@ -14,22 +14,36 @@
         }
 
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
             color: #333;
-            background: #f5f5f5;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        /* Color Variables */
+        :root {
+            --primary: #6c5ce7;
+            --secondary: #a29bfe;
+            --accent: #fd79a8;
+            --success: #00b894;
+            --danger: #e17055;
+            --warning: #fdcb6e;
+            --dark: #2d3436;
+            --light: #f9f9f9;
         }
 
         /* Header */
         header {
-            background: white;
-            padding: 1rem 2rem;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.2rem 2rem;
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
         }
 
         .header-content {
@@ -41,18 +55,32 @@
         }
 
         .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #2c3e50;
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
         }
 
         .admin-btn {
-            background: #3498db;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
             color: white;
             border: none;
-            padding: 8px 16px;
-            border-radius: 5px;
+            padding: 10px 20px;
+            border-radius: 50px;
             cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(108, 92, 231, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .admin-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(108, 92, 231, 0.4);
         }
 
         /* Main Content */
@@ -65,114 +93,195 @@
         /* Hero Section */
         .hero {
             text-align: center;
-            padding: 40px 20px;
-            background: white;
-            border-radius: 10px;
-            margin-bottom: 30px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            padding: 60px 40px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            margin-bottom: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--accent), var(--success));
         }
 
         .profile-pic {
-            width: 150px;
-            height: 150px;
+            width: 180px;
+            height: 180px;
             border-radius: 50%;
             object-fit: cover;
-            margin: 0 auto 20px;
+            margin: 0 auto 25px;
             display: block;
-            border: 5px solid #3498db;
+            border: 8px solid;
+            border-image-slice: 1;
+            border-width: 5px;
+            border-image-source: linear-gradient(45deg, var(--primary), var(--accent));
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         }
 
         h1 {
-            color: #2c3e50;
-            margin-bottom: 10px;
+            color: var(--dark);
+            margin-bottom: 15px;
+            font-size: 3rem;
+            background: linear-gradient(45deg, var(--primary), var(--dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .tagline {
-            color: #666;
-            font-size: 1.2rem;
+            color: var(--primary);
+            font-size: 1.4rem;
+            font-weight: 300;
+            margin-bottom: 20px;
         }
 
-        /* Books Section */
+        /* Sections */
         .section {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 20px;
             margin-bottom: 30px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--warning), var(--danger), var(--accent));
         }
 
         h2 {
-            color: #2c3e50;
-            margin-bottom: 20px;
+            color: var(--dark);
+            margin-bottom: 25px;
+            font-size: 2.2rem;
+            position: relative;
+            display: inline-block;
             padding-bottom: 10px;
-            border-bottom: 3px solid #3498db;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 2px;
         }
 
         /* Books Grid */
         .books-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
         }
 
         .book-card {
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            padding: 20px;
-            text-align: center;
             background: white;
-            transition: transform 0.3s;
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .book-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--success), var(--primary));
         }
 
         .book-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
         }
 
         .book-cover {
-            width: 150px;
-            height: 200px;
+            width: 160px;
+            height: 220px;
             object-fit: cover;
-            border-radius: 5px;
-            margin: 0 auto 15px;
+            border-radius: 10px;
+            margin: 0 auto 20px;
             display: block;
-            background: #f0f0f0;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .book-card:hover .book-cover {
+            transform: scale(1.05);
         }
 
         .book-title {
-            font-weight: bold;
-            margin-bottom: 10px;
-            color: #2c3e50;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--dark);
+            font-size: 1.3rem;
         }
 
         .book-description {
             color: #666;
-            font-size: 0.9rem;
-            margin-bottom: 15px;
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+            line-height: 1.5;
         }
 
         .buy-btn {
-            background: #e74c3c;
+            background: linear-gradient(45deg, var(--danger), #e84393);
             color: white;
             text-decoration: none;
-            padding: 8px 16px;
-            border-radius: 5px;
+            padding: 12px 25px;
+            border-radius: 50px;
             display: inline-block;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(231, 112, 85, 0.3);
+        }
+
+        .buy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(231, 112, 85, 0.4);
         }
 
         /* Admin Panel */
         .admin-panel {
             position: fixed;
             top: 0;
-            right: -400px;
-            width: 400px;
+            right: -450px;
+            width: 450px;
             height: 100%;
-            background: white;
-            box-shadow: -5px 0 15px rgba(0,0,0,0.1);
-            transition: right 0.3s;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            box-shadow: -5px 0 30px rgba(0,0,0,0.3);
+            transition: right 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
             z-index: 2000;
-            padding: 20px;
+            padding: 30px;
             overflow-y: auto;
         }
 
@@ -181,76 +290,170 @@
         }
 
         .close-admin {
-            background: #e74c3c;
+            background: rgba(255, 255, 255, 0.2);
             color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 5px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            padding: 10px 20px;
+            border-radius: 50px;
             cursor: pointer;
+            margin-bottom: 30px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .close-admin:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateX(-5px);
+        }
+
+        .admin-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .admin-section h3 {
+            color: var(--primary);
             margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .form-group {
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
 
         label {
             display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark);
         }
 
-        input, textarea {
+        input, textarea, select {
             width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
             font-size: 16px;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.1);
         }
 
         textarea {
-            height: 100px;
+            height: 120px;
+            resize: vertical;
         }
 
         .form-btn {
-            background: #27ae60;
+            background: linear-gradient(45deg, var(--success), #00cec9);
             color: white;
             border: none;
-            padding: 12px 24px;
-            border-radius: 5px;
+            padding: 15px 30px;
+            border-radius: 50px;
             cursor: pointer;
             font-size: 16px;
             width: 100%;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .form-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 184, 148, 0.3);
+        }
+
+        .delete-btn {
+            background: linear-gradient(45deg, var(--danger), #d63031);
+        }
+
+        .delete-btn:hover {
+            box-shadow: 0 8px 25px rgba(225, 112, 85, 0.3);
         }
 
         /* Social Links */
         .social-links {
             display: flex;
-            gap: 15px;
+            gap: 20px;
             justify-content: center;
-            margin-top: 20px;
+            margin-top: 30px;
+            flex-wrap: wrap;
         }
 
         .social-icon {
-            width: 40px;
-            height: 40px;
-            background: #3498db;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
             color: white;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             text-decoration: none;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(108, 92, 231, 0.3);
+        }
+
+        .social-icon:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 10px 25px rgba(108, 92, 231, 0.4);
+        }
+
+        .social-icon.twitter {
+            background: linear-gradient(45deg, #1da1f2, #009ff5);
+        }
+
+        .social-icon.instagram {
+            background: linear-gradient(45deg, #e4405f, #c13584);
+        }
+
+        .social-icon.amazon {
+            background: linear-gradient(45deg, #ff9900, #ff6b00);
         }
 
         /* Footer */
         footer {
             text-align: center;
-            padding: 20px;
-            background: #2c3e50;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
             color: white;
-            margin-top: 50px;
+            margin-top: 60px;
+            border-radius: 20px 20px 0 0;
+        }
+
+        /* Colorful Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section {
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        .book-card {
+            animation: fadeIn 0.6s ease-out;
         }
 
         /* Responsive */
@@ -263,6 +466,56 @@
             .books-grid {
                 grid-template-columns: 1fr;
             }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .section {
+                padding: 25px;
+            }
+            
+            .social-links {
+                gap: 15px;
+            }
+        }
+
+        /* Loading Animation */
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: var(--primary);
+        }
+
+        .loading::after {
+            content: '...';
+            animation: dots 1.5s steps(4, end) infinite;
+        }
+
+        @keyframes dots {
+            0%, 20% { content: '.'; }
+            40% { content: '..'; }
+            60%, 100% { content: '...'; }
+        }
+
+        /* Colorful Badges */
+        .badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+
+        .badge-new {
+            background: linear-gradient(45deg, var(--success), #00cec9);
+            color: white;
+        }
+
+        .badge-featured {
+            background: linear-gradient(45deg, var(--warning), #fdcb6e);
+            color: var(--dark);
         }
     </style>
 </head>
@@ -272,7 +525,7 @@
         <div class="header-content">
             <div class="logo">Rabee Luqmann</div>
             <button class="admin-btn" id="adminBtn">
-                <i class="fas fa-cog"></i> Admin Panel
+                <i class="fas fa-magic"></i> Manage Website
             </button>
         </div>
     </header>
@@ -281,21 +534,32 @@
     <div class="main-content">
         <!-- Hero Section -->
         <section class="hero">
-            <img src="https://via.placeholder.com/150" alt="Rabee Luqmann" class="profile-pic" id="profilePic">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop" 
+                 alt="Rabee Luqmann" class="profile-pic" id="profilePic">
             <h1>Rabee Luqmann</h1>
-            <p class="tagline">Author • Storyteller</p>
+            <p class="tagline">Author • Storyteller • Explorer of Hearts</p>
+            <div class="social-links">
+                <a href="#" class="social-icon twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="social-icon instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="social-icon amazon"><i class="fab fa-amazon"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-goodreads"></i></a>
+            </div>
         </section>
 
         <!-- About Section -->
         <section class="section" id="about">
             <h2>About Me</h2>
-            <p>I am Rabee Luqmann, a passionate author who loves to write stories that touch people's hearts. My books explore deep human emotions and experiences.</p>
-            <p>Welcome to my official website where you can find all my books and connect with me.</p>
+            <p style="font-size: 1.1rem; line-height: 1.8; color: #555;">
+                I am <strong style="color: var(--primary);">Rabee Luqmann</strong>, a passionate author who crafts stories that touch the deepest corners of the human heart. My journey in literature is fueled by a desire to explore love, longing, and the complex tapestry of human emotions across diverse cultures.
+            </p>
+            <p style="margin-top: 20px; font-size: 1.1rem; line-height: 1.8; color: #555;">
+                Each book is a new adventure, a new exploration of what makes us human. From the traditional landscapes of India in "Bound by Destiny" to the raw emotional depths in "Endorphin," my writing invites readers on journeys they won't soon forget.
+            </p>
         </section>
 
         <!-- Books Section -->
         <section class="section" id="books">
-            <h2>My Books</h2>
+            <h2>My Books <span class="badge badge-new">New</span></h2>
             <div id="booksContainer" class="books-grid">
                 <!-- Books will be loaded here -->
             </div>
@@ -303,15 +567,16 @@
 
         <!-- Contact Section -->
         <section class="section" id="contact">
-            <h2>Contact</h2>
-            <p>Email: contact@rabeeluqmann.com</p>
-            <p>Phone: +1 (555) 123-4567</p>
-            
-            <div class="social-links">
-                <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
-                <a href="#" class="social-icon"><i class="fab fa-facebook"></i></a>
-                <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
-                <a href="#" class="social-icon"><i class="fab fa-amazon"></i></a>
+            <h2>Let's Connect</h2>
+            <div style="background: linear-gradient(135deg, rgba(108, 92, 231, 0.1), rgba(253, 121, 168, 0.1)); padding: 30px; border-radius: 15px;">
+                <p style="font-size: 1.2rem; margin-bottom: 20px; color: var(--primary);">
+                    <i class="fas fa-envelope" style="margin-right: 10px;"></i>
+                    contact@rabeeluqmann.com
+                </p>
+                <p style="font-size: 1.2rem; color: var(--primary);">
+                    <i class="fas fa-phone" style="margin-right: 10px;"></i>
+                    +1 (555) 123-4567
+                </p>
             </div>
         </section>
     </div>
@@ -319,97 +584,101 @@
     <!-- Admin Panel -->
     <div class="admin-panel" id="adminPanel">
         <button class="close-admin" id="closeAdmin">
-            <i class="fas fa-times"></i> Close
+            <i class="fas fa-times"></i> Close Panel
         </button>
-        <h2><i class="fas fa-tools"></i> Website Manager</h2>
         
         <!-- Profile Photo Update -->
-        <div class="section" style="margin: 20px 0;">
-            <h3><i class="fas fa-user"></i> Update Profile Photo</h3>
+        <div class="admin-section">
+            <h3><i class="fas fa-user-circle" style="color: var(--accent);"></i> Update Your Photo</h3>
             <div class="form-group">
-                <label>Choose your photo:</label>
+                <label><i class="fas fa-camera"></i> Choose Profile Photo</label>
                 <input type="file" id="profilePhotoInput" accept="image/*">
             </div>
             <button class="form-btn" onclick="updateProfilePhoto()">
-                <i class="fas fa-upload"></i> Update Photo
+                <i class="fas fa-cloud-upload-alt"></i> Upload New Photo
             </button>
         </div>
 
         <!-- Add New Book -->
-        <div class="section" style="margin: 20px 0;">
-            <h3><i class="fas fa-book"></i> Add New Book</h3>
+        <div class="admin-section">
+            <h3><i class="fas fa-book-medical" style="color: var(--success);"></i> Publish New Book</h3>
             <div class="form-group">
-                <label>Book Title:</label>
-                <input type="text" id="newBookTitle" placeholder="Enter book title">
+                <label>Book Title</label>
+                <input type="text" id="newBookTitle" placeholder="Enter the book title...">
             </div>
             <div class="form-group">
-                <label>Book Description:</label>
-                <textarea id="newBookDescription" placeholder="Enter book description"></textarea>
+                <label>Book Description</label>
+                <textarea id="newBookDescription" placeholder="Write a captivating description..."></textarea>
             </div>
             <div class="form-group">
-                <label>Cover Image:</label>
+                <label>Cover Image</label>
                 <input type="file" id="newBookCover" accept="image/*">
             </div>
             <div class="form-group">
-                <label>Amazon Link (optional):</label>
+                <label>Amazon Link (Optional)</label>
                 <input type="url" id="newBookLink" placeholder="https://amazon.com/dp/...">
             </div>
             <button class="form-btn" onclick="addNewBook()">
-                <i class="fas fa-plus"></i> Add Book
+                <i class="fas fa-plus-circle"></i> Add to Collection
             </button>
         </div>
 
         <!-- Manage Existing Books -->
-        <div class="section" style="margin: 20px 0;">
-            <h3><i class="fas fa-list"></i> Manage Books</h3>
+        <div class="admin-section">
+            <h3><i class="fas fa-edit" style="color: var(--warning);"></i> Manage Books</h3>
             <div id="adminBooksList">
                 <!-- Books will be listed here -->
             </div>
         </div>
 
         <!-- Backup & Restore -->
-        <div class="section" style="margin: 20px 0;">
-            <h3><i class="fas fa-database"></i> Backup Your Website</h3>
-            <p style="color: #666; margin-bottom: 15px;">
-                <small>Save all your books and profile photo to a file</small>
+        <div class="admin-section">
+            <h3><i class="fas fa-shield-alt" style="color: var(--primary);"></i> Data Safety</h3>
+            <p style="color: #666; margin-bottom: 20px; font-size: 0.9rem;">
+                <i class="fas fa-info-circle"></i> Save all your data to a file. Keep it safe!
             </p>
             <button class="form-btn" onclick="exportData()">
                 <i class="fas fa-download"></i> Backup Everything
             </button>
             
             <div class="form-group" style="margin-top: 20px;">
-                <label>Restore from Backup:</label>
+                <label><i class="fas fa-upload"></i> Restore from Backup</label>
                 <input type="file" id="importFile" accept=".json">
             </div>
-            <button class="form-btn" onclick="importData()" style="background: #f39c12;">
-                <i class="fas fa-upload"></i> Restore Backup
+            <button class="form-btn" onclick="importData()" style="background: linear-gradient(45deg, var(--primary), var(--secondary));">
+                <i class="fas fa-redo"></i> Restore Data
             </button>
         </div>
     </div>
 
     <footer>
-        <p>&copy; 2024 Rabee Luqmann. All rights reserved.</p>
+        <p style="font-size: 1.1rem; margin-bottom: 10px;">© 2024 Rabee Luqmann. All stories preserved.</p>
+        <p style="opacity: 0.8;">Crafted with passion • Updated with love</p>
     </footer>
 
     <script>
-        // Book Management System
-        // NO PASSWORD REQUIRED - you can access anytime!
+        // Colorful Book Management System
+        // NO PASSWORD - Instant access!
 
-        // Sample books data
+        // Sample books data with colorful details
         let books = [
             {
                 id: 1,
                 title: "Bound by Destiny",
-                description: "A poignant portrayal of arranged marriage in India, blending tradition with modernity.",
-                cover: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=400&h=600&fit=crop",
-                link: "https://amazon.com"
+                description: "A poignant portrayal of arranged marriage in India, blending tradition with modernity. A story of love, duty, and self-discovery.",
+                cover: "https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400&h=600&fit=crop",
+                link: "https://amazon.com",
+                date: "2023",
+                featured: true
             },
             {
                 id: 2,
                 title: "Endorphin: The Ache of Wanting",
-                description: "A raw, lyrical narrative exploring longing, addiction, and obsessive emotion.",
+                description: "A raw, lyrical narrative exploring longing, addiction, and obsessive emotion. Dive into the depths of human desire.",
                 cover: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=600&fit=crop",
-                link: "https://amazon.com"
+                link: "https://amazon.com",
+                date: "2024",
+                featured: true
             }
         ];
 
@@ -425,11 +694,22 @@
             loadBooks();
             loadProfilePhoto();
             loadAdminBooks();
+            
+            // Add some animation on load
+            setTimeout(() => {
+                document.querySelectorAll('.book-card').forEach((card, index) => {
+                    card.style.animationDelay = `${index * 0.1}s`;
+                });
+            }, 100);
         });
 
         // Show/Hide Admin Panel - INSTANT ACCESS!
         adminBtn.addEventListener('click', function() {
             adminPanel.classList.add('active');
+            adminBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Opening...';
+            setTimeout(() => {
+                adminBtn.innerHTML = '<i class="fas fa-magic"></i> Manage Website';
+            }, 400);
         });
 
         closeAdmin.addEventListener('click', function() {
@@ -448,19 +728,28 @@
             booksContainer.innerHTML = '';
             
             if (books.length === 0) {
-                booksContainer.innerHTML = '<p style="text-align: center; color: #666; padding: 40px;">No books added yet. Add your first book using the Admin Panel!</p>';
+                booksContainer.innerHTML = `
+                    <div style="text-align: center; padding: 60px; color: #666;">
+                        <i class="fas fa-book-open" style="font-size: 3rem; color: var(--primary); margin-bottom: 20px; opacity: 0.5;"></i>
+                        <h3 style="color: var(--primary); margin-bottom: 10px;">No Books Yet</h3>
+                        <p>Your literary journey begins here! Add your first book using the Manage Website panel.</p>
+                    </div>
+                `;
                 return;
             }
             
-            books.forEach(book => {
+            books.forEach((book, index) => {
                 const bookCard = document.createElement('div');
                 bookCard.className = 'book-card';
+                bookCard.style.animationDelay = `${index * 0.1}s`;
                 bookCard.innerHTML = `
-                    <img src="${book.cover}" alt="${book.title}" class="book-cover" 
-                         onerror="this.src='https://via.placeholder.com/150x200?text=${book.title.replace(/ /g, '+')}'">
+                    ${book.featured ? '<div class="badge badge-featured" style="position: absolute; top: 15px; right: 15px;"><i class="fas fa-star"></i> Featured</div>' : ''}
+                    <img src="${book.cover}" alt="${book.title}" class="book-cover"
+                         onerror="this.src='https://images.unsplash.com/photo-1541963463532-d68292c34b19?w=400&h=600&fit=crop&text=${book.title}'">
                     <h3 class="book-title">${book.title}</h3>
+                    ${book.date ? `<small style="color: var(--primary); font-weight: 600; display: block; margin-bottom: 10px;">Published: ${book.date}</small>` : ''}
                     <p class="book-description">${book.description}</p>
-                    ${book.link ? `<a href="${book.link}" target="_blank" class="buy-btn">Buy Now</a>` : ''}
+                    ${book.link ? `<a href="${book.link}" target="_blank" class="buy-btn"><i class="fab fa-amazon"></i> Get on Amazon</a>` : ''}
                 `;
                 booksContainer.appendChild(bookCard);
             });
@@ -471,7 +760,12 @@
             const adminBooksList = document.getElementById('adminBooksList');
             
             if (books.length === 0) {
-                adminBooksList.innerHTML = '<p style="text-align: center; color: #666; padding: 20px;">No books yet. Add your first book above!</p>';
+                adminBooksList.innerHTML = `
+                    <div style="text-align: center; padding: 30px; color: #666; background: rgba(0,0,0,0.03); border-radius: 10px;">
+                        <i class="fas fa-books" style="font-size: 2rem; color: var(--primary); opacity: 0.5; margin-bottom: 15px;"></i>
+                        <p>No books in your collection yet. Add your first masterpiece above!</p>
+                    </div>
+                `;
                 return;
             }
             
@@ -480,17 +774,20 @@
             books.forEach((book, index) => {
                 const bookItem = document.createElement('div');
                 bookItem.className = 'book-card';
-                bookItem.style.marginBottom = '10px';
+                bookItem.style.marginBottom = '15px';
+                bookItem.style.padding = '15px';
                 bookItem.innerHTML = `
-                    <div style="display: flex; align-items: center; gap: 10px; padding: 10px;">
-                        <img src="${book.cover}" style="width: 50px; height: 70px; object-fit: cover; border-radius: 5px;"
-                             onerror="this.style.background='#f0f0f0'; this.innerHTML='<div style=\\'display:flex; align-items:center; justify-content:center; height:100%; font-size:12px; color:#666;\\'>Cover</div>'">
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <img src="${book.cover}" 
+                             style="width: 60px; height: 80px; object-fit: cover; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);"
+                             onerror="this.style.background='linear-gradient(45deg, var(--primary), var(--secondary))'; this.innerHTML='<div style=\\'display:flex; align-items:center; justify-content:center; height:100%; color:white; font-size:11px; padding:5px;\\'>Cover</div>'">
                         <div style="flex-grow: 1;">
-                            <strong>${book.title}</strong><br>
-                            <small style="color: #666;">${book.description.substring(0, 60)}...</small>
+                            <strong style="color: var(--dark); display: block; margin-bottom: 5px;">${book.title}</strong>
+                            <small style="color: #666;">${book.description.substring(0, 70)}...</small>
                         </div>
                         <button onclick="deleteBook(${index})" 
-                                style="background: #e74c3c; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer;">
+                                class="form-btn delete-btn"
+                                style="width: auto; padding: 8px 15px; font-size: 14px;">
                             <i class="fas fa-trash"></i>
                         </button>
                     </div>
@@ -505,7 +802,7 @@
             const file = fileInput.files[0];
             
             if (!file) {
-                alert('Please select a photo first!');
+                alert('📸 Please select a photo first!');
                 return;
             }
             
@@ -517,7 +814,8 @@
                 // Update on page
                 profilePic.src = e.target.result;
                 
-                alert('✓ Profile photo updated!');
+                // Show success message
+                showMessage('✅ Profile photo updated successfully!', 'success');
                 fileInput.value = '';
             };
             reader.readAsDataURL(file);
@@ -539,16 +837,18 @@
             const fileInput = document.getElementById('newBookCover');
             
             if (!title || !description) {
-                alert('Please fill in title and description!');
+                alert('📖 Please fill in both title and description!');
                 return;
             }
             
             const newBook = {
-                id: Date.now(), // Create unique ID
+                id: Date.now(),
                 title: title,
                 description: description,
                 link: link || 'https://amazon.com',
-                cover: 'https://via.placeholder.com/150x200?text=' + title.replace(/ /g, '+')
+                cover: 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400&h=600&fit=crop',
+                date: new Date().getFullYear().toString(),
+                featured: true
             };
             
             // If user uploaded a cover image
@@ -581,13 +881,19 @@
             document.getElementById('newBookLink').value = '';
             document.getElementById('newBookCover').value = '';
             
-            alert('✓ Book added successfully!');
+            // Show success message
+            showMessage('🎉 Book added to your collection!', 'success');
+            
+            // Close admin panel
+            setTimeout(() => {
+                adminPanel.classList.remove('active');
+            }, 1500);
         }
 
         // Delete a book
         function deleteBook(index) {
-            if (confirm('Are you sure you want to delete "' + books[index].title + '"?')) {
-                books.splice(index, 1);
+            if (confirm(`Are you sure you want to delete "${books[index].title}"?`)) {
+                const deletedBook = books.splice(index, 1);
                 
                 // Save to browser storage
                 localStorage.setItem('rabeeluqmann_books', JSON.stringify(books));
@@ -596,7 +902,8 @@
                 loadBooks();
                 loadAdminBooks();
                 
-                alert('✓ Book deleted!');
+                // Show message
+                showMessage(`🗑️ "${deletedBook[0].title}" has been removed.`, 'warning');
             }
         }
 
@@ -605,7 +912,8 @@
             const data = {
                 profilePhoto: localStorage.getItem('rabeeluqmann_profile'),
                 books: books,
-                exportedAt: new Date().toLocaleString()
+                exportedAt: new Date().toLocaleString(),
+                website: "Rabee Luqmann Author Website"
             };
             
             const dataStr = JSON.stringify(data, null, 2);
@@ -614,10 +922,11 @@
             // Create download link
             const link = document.createElement('a');
             link.href = URL.createObjectURL(dataBlob);
-            link.download = 'rabeeluqmann_website_backup_' + new Date().toISOString().split('T')[0] + '.json';
+            const dateStr = new Date().toISOString().split('T')[0];
+            link.download = `rabeeluqmann_backup_${dateStr}.json`;
             link.click();
             
-            alert('✓ Backup downloaded! Save this file to keep your website data safe.');
+            showMessage('💾 Backup downloaded! Keep this file safe.', 'success');
         }
 
         // Import data
@@ -626,7 +935,7 @@
             const file = fileInput.files[0];
             
             if (!file) {
-                alert('Please select a backup file first!');
+                alert('📁 Please select a backup file first!');
                 return;
             }
             
@@ -651,29 +960,20 @@
                     loadBooks();
                     loadAdminBooks();
                     
-                    alert('✓ Backup restored successfully!');
+                    showMessage('🔄 Backup restored successfully!', 'success');
                     fileInput.value = '';
                     
                 } catch (error) {
-                    alert('❌ Error: Invalid backup file. Please make sure you selected the correct file.');
+                    showMessage('❌ Invalid backup file. Please select the correct file.', 'error');
                 }
             };
             reader.readAsText(file);
         }
 
-        // Close admin panel when clicking outside
-        document.addEventListener('click', function(event) {
-            if (!adminPanel.contains(event.target) && !adminBtn.contains(event.target)) {
-                adminPanel.classList.remove('active');
-            }
-        });
-
-        // Also close with Escape key
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape') {
-                adminPanel.classList.remove('active');
-            }
-        });
-    </script>
-</body>
-</html>
+        // Show message
+        function showMessage(text, type) {
+            // Remove existing message
+            const existingMsg = document.querySelector('.message-popup');
+            if (existingMsg) existingMsg.remove();
+            
+            // Create message element
