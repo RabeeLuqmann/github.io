@@ -1,25 +1,23 @@
 {
   "profilePhoto": "https://via.placeholder.com/150",
   "social": {
-    "twitter": "#",
-    "facebook": "#",
-    "instagram": "#",
-    "amazon": "#"
+    "twitter": "https://twitter.com/yourhandle",
+    "facebook": "https://facebook.com/yourhandle",
+    "instagram": "https://instagram.com/yourhandle",
+    "amazon": "https://amazon.com/author/yourname"
   },
   "books": [
     {
-      "id": 1,
       "title": "Bound by Destiny",
       "description": "A story about love and destiny",
-      "cover": "https://via.placeholder.com/150x200",
-      "link": "#"
+      "cover": "https://via.placeholder.com/150x200?text=Bound+by+Destiny",
+      "link": "https://amazon.com"
     },
     {
-      "id": 2,
       "title": "Endorphin",
       "description": "Exploring the ache of wanting",
-      "cover": "https://via.placeholder.com/150x200",
-      "link": "#"
+      "cover": "https://via.placeholder.com/150x200?text=Endorphin",
+      "link": "https://amazon.com"
     }
   ]
 }
