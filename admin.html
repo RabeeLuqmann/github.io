@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rabee Luqmann - Admin</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; background: #2c3e50; color: white; }
+        
+        .admin-container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        
+        .admin-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .admin-header h1 {
+            color: white;
+            margin-bottom: 10px;
+        }
+        
+        .admin-header a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        .admin-card {
+            background: white;
+            color: #333;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        input, textarea, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        textarea {
+            height: 100px;
+        }
+        
+        .save-btn {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        
+        .delete-btn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        
+        .book-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .back-btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 20px;
+        }
+        
+        .preview {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <div class="admin-header">
+            <h1><i class="fas fa-lock"></i> Author Admin Panel</h1>
+            <p>Manage your website here. Only you can access this page.</p>
+            <a href="index.html">← View Public Website</a>
+        </div>
+        
+        <!-- Profile Editor -->
+        <div class="admin-card">
+            <h2><i class="fas fa-user"></i> Edit Your Profile</h2>
+            
+            <div class="form-group">
+                <label>Your Name:</label>
+                <input type="text" id="editName" placeholder="Rabee Luqmann">
+            </div>
+            
+            <div class="form-group">
+                <label>Tagline:</label>
+                <input type="text" id="editTagline" placeholder="Author • Storyteller">
+            </div>
+            
+            <div class="form-group">
+                <label>Profile Photo:</label>
+                <input type="file" id="editPhoto" accept="image/*">
+                <small>Current: <span id="currentPhoto">Loading...</span></small>
+            </div>
+            
+            <div class="form-group">
+                <label>Email:</label>
+                <input type="email" id="editEmail" placeholder="contact@rabeeluqmann.com">
+            </div>
+            
+            <div class="form-group">
+                <label>Phone:</label>
+                <input type="text" id="editPhone" placeholder="+1 (555) 123-4567">
+            </div>
+            
+            <button class="save-btn" onclick="saveProfile()">
+                <i class="fas fa-save"></i> Save Profile
+            </button>
+            
+            <div class="preview" id="profilePreview">
+                <strong>Preview:</strong>
+                <p>Name: <span id="previewName"></span></p>
+                <p>Tagline: <span id="previewTagline"></span></p>
+            </div>
+        </div>
+        
+        <!-- Book Manager -->
+        <div class="admin-card">
+            <h2><i class="fas fa-book"></i> Manage Your Books</h2>
+            
+            <h3>Add New Book</h3>
+            <div class="form-group">
+                <label>Book Title:</label>
+                <input type="text" id="newBookTitle" placeholder="Enter book title">
+            </div>
+            
+            <div class="form-group">
+                <label>Description:</label>
+                <textarea id="newBookDescription" placeholder="Enter book description"></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label>Cover Image:</label>
+                <input type="file" id="newBookCover" accept="image/*">
+            </div>
+            
+            <div class="form-group">
+                <label>Amazon Link (optional):</label>
+                <input type="url" id="newBookLink" placeholder="https://amazon.com/dp/...">
+            </div>
+            
+            <button class="save-btn" onclick="addBook()">
+                <i class="fas fa-plus"></i> Add Book
+            </button>
+            
+            <h3 style="margin-top: 30px;">Your Books</h3>
+            <div id="booksList">
+                <p>Loading your books...</p>
+            </div>
+        </div>
+        
+        <!-- Backup -->
+        <div class="admin-card">
+            <h2><i class="fas fa-database"></i> Backup Your Data</h2>
+            <p>Save all your website data to a file for safekeeping.</p>
+            
+            <button class="save-btn" onclick="backupData()" style="background: #3498db;">
+                <i class="fas fa-download"></i> Download Backup
+            </button>
+            
+            <div class="form-group" style="margin-top: 20px;">
+                <label>Restore from Backup:</label>
+                <input type="file" id="restoreFile" accept=".json">
+            </div>
+            
+            <button class="save-btn" onclick="restoreData()" style="background: #9b59b6;">
+                <i class="fas fa-upload"></i> Restore Backup
+            </button>
+        </div>
+        
+        <a href="index.html" class="back-btn">
+            <i class="fas fa-eye"></i> View Your Website
+        </a>
+    </div>
+
+    <script>
+        // Load current data
+        let siteData = {
+            name: "Rabee Luqmann",
+            tagline: "Author • Storyteller",
+            photo: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop",
+            email: "contact@rabeeluqmann.com",
+            phone: "+1 (555) 123-4567",
+            books: []
+        };
+        
+        // Load saved data on start
+        window.onload = function() {
+            loadData();
+            updateForms();
+            loadBooksList();
+        };
+        
+        // Load data from storage
+        function loadData() {
+            const saved = localStorage.getItem('rabee_author_data');
+            if (saved) {
+                siteData = JSON.parse(saved);
+                console.log("Data loaded:", siteData);
+            }
+        }
+        
+        // Save data to storage
+        function saveData() {
+            localStorage.setItem('rabee_author_data', JSON.stringify(siteData));
+            console.log("Data saved:", siteData);
+            alert("✓ Changes saved! View your website to see updates.");
+        }
+        
+        // Update form fields with current data
+        function updateForms() {
+            document.getElementById('editName').value = siteData.name;
+            document.getElementById('editTagline').value = siteData.tagline;
+            document.getElementById('editEmail').value = siteData.email;
+            document.getElementById('editPhone').value = siteData.phone;
+            document.getElementById('currentPhoto').textContent = siteData.photo.substring(0, 50) + '...';
+            
+            // Preview
+            document.getElementById('previewName').textContent = siteData.name;
+            document.getElementById('previewTagline').textContent = siteData.tagline;
+        }
+        
+        // Save profile
+        function saveProfile() {
+            siteData.name = document.getElementById('editName').value || siteData.name;
+            siteData.tagline = document.getElementById('editTagline').value || siteData.tagline;
+            siteData.email = document.getElementById('editEmail').value || siteData.email;
+            siteData.phone = document.getElementById('editPhone').value || siteData.phone;
+            
+            // Handle photo upload
+            const photoFile = document.getElementById('editPhoto').files[0];
+            if (photoFile) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    siteData.photo = e.target.result;
+                    saveData();
+                    updateForms();
+                };
+                reader.readAsDataURL(photoFile);
+            } else {
+                saveData();
+                updateForms();
+            }
+        }
+        
+        // Add new book
+        function addBook() {
+            const title = document.getElementById('newBookTitle').value;
+            const description = document.getElementById('newBookDescription').value;
+            const link = document.getElementById('newBookLink').value;
+            const coverFile = document.getElementById('newBookCover').files[0];
+            
+            if (!title || !description) {
+                alert("Please enter book title and description!");
+                return;
+            }
+            
+            const newBook = {
+                title: title,
+                description: description,
+                link: link || 'https://amazon.com',
+                cover: 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400&h=600&fit=crop'
+            };
+            
+            if (coverFile) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    newBook.cover = e.target.result;
+                    siteData.books.push(newBook);
+                    saveData();
+                    loadBooksList();
+                    clearBookForm();
+                };
+                reader.readAsDataURL(coverFile);
+            } else {
+                siteData.books.push(newBook);
+                saveData();
+                loadBooksList();
+                clearBookForm();
+            }
+        }
+        
+        // Load books list
+        function loadBooksList() {
+            const container = document.getElementById('booksList');
+            
+            if (siteData.books.length === 0) {
+                container.innerHTML = '<p>No books yet. Add your first book above!</p>';
+                return;
+            }
+            
+            container.innerHTML = siteData.books.map((book, index) => `
+                <div class="book-item">
+                    <div>
+                        <strong>${book.title}</strong>
+                        <p style="margin: 5px 0 0 0; color: #666; font-size: 0.9em;">
+                            ${book.description.substring(0, 60)}...
+                        </p>
+                    </div>
+                    <button class="delete-btn" onclick="deleteBook(${index})">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            `).join('');
+        }
+        
+        // Delete book
+        function deleteBook(index) {
+            if (confirm(`Delete "${siteData.books[index].title}"?`)) {
+                siteData.books.splice(index, 1);
+                saveData();
+                loadBooksList();
+            }
+        }
+        
+        // Clear book form
+        function clearBookForm() {
+            document.getElementById('newBookTitle').value = '';
+            document.getElementById('newBookDescription').value = '';
+            document.getElementById('newBookLink').value = '';
+            document.getElementById('newBookCover').value = '';
+        }
+        
+        // Backup data
+        function backupData() {
+            const dataStr = JSON.stringify(siteData, null, 2);
+            const blob = new Blob([dataStr], {type: 'application/json'});
+            const url = URL.createObjectURL(blob);
+            
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'rabee_luqmann_backup.json';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            
+            alert('✓ Backup downloaded! Save this file safely.');
+        }
+        
+        // Restore data
+        function restoreData() {
+            const fileInput = document.getElementById('restoreFile');
+            const file = fileInput.files[0];
+            
+            if (!file) {
+                alert('Please select a backup file first!');
+                return;
+            }
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const restoredData = JSON.parse(e.target.result);
+                    siteData = restoredData;
+                    saveData();
+                    updateForms();
+                    loadBooksList();
+                    alert('✓ Backup restored successfully!');
+                    fileInput.value = '';
+                } catch (error) {
+                    alert('❌ Invalid backup file. Please select a valid backup.');
+                }
+            };
+            reader.readAsText(file);
+        }
+    </script>
+</body>
+</html>
