@@ -6,7 +6,6 @@
     <title>Rabee Luqmann - Author</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Simple Reset */
         * {
             margin: 0;
             padding: 0;
@@ -14,23 +13,22 @@
         }
 
         body {
-            font-family: 'Arial', sans-serif;
-            line-height: 1.6;
-            color: #333;
+            font-family: Arial, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
             min-height: 100vh;
         }
 
         /* Header */
         header {
             background: white;
-            padding: 1rem 2rem;
+            padding: 1rem;
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
-            z-index: 1000;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
         }
 
         .header-content {
@@ -47,7 +45,7 @@
             color: #2c3e50;
         }
 
-        .admin-btn {
+        .edit-btn {
             background: #3498db;
             color: white;
             border: none;
@@ -58,41 +56,44 @@
             font-weight: bold;
         }
 
-        .admin-btn:hover {
+        .edit-btn:hover {
             background: #2980b9;
         }
 
         /* Main Content */
         .main-content {
             max-width: 1200px;
-            margin: 100px auto 50px;
-            padding: 0 20px;
+            margin: 80px auto 30px;
+            padding: 20px;
         }
 
-        /* Hero Section */
-        .hero {
-            text-align: center;
-            padding: 40px;
+        /* Sections */
+        .section {
             background: white;
+            padding: 30px;
+            margin-bottom: 20px;
             border-radius: 10px;
-            margin-bottom: 30px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
 
+        /* Hero */
+        .hero {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
         .profile-pic {
-            width: 180px;
-            height: 180px;
+            width: 150px;
+            height: 150px;
             border-radius: 50%;
             object-fit: cover;
-            margin: 0 auto 20px;
-            display: block;
             border: 5px solid #3498db;
+            margin-bottom: 20px;
         }
 
         h1 {
             color: #2c3e50;
             margin-bottom: 10px;
-            font-size: 2.5rem;
         }
 
         .tagline {
@@ -101,23 +102,7 @@
             margin-bottom: 20px;
         }
 
-        /* Sections */
-        .section {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            margin-bottom: 30px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        h2 {
-            color: #2c3e50;
-            margin-bottom: 20px;
-            border-bottom: 3px solid #3498db;
-            padding-bottom: 10px;
-        }
-
-        /* Books Grid */
+        /* Books */
         .books-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -130,7 +115,6 @@
             border-radius: 10px;
             padding: 20px;
             text-align: center;
-            background: white;
         }
 
         .book-cover {
@@ -138,8 +122,7 @@
             height: 200px;
             object-fit: cover;
             border-radius: 5px;
-            margin: 0 auto 15px;
-            display: block;
+            margin-bottom: 15px;
         }
 
         .book-title {
@@ -148,7 +131,7 @@
             color: #2c3e50;
         }
 
-        .book-description {
+        .book-desc {
             color: #666;
             font-size: 0.9rem;
             margin-bottom: 15px;
@@ -157,33 +140,25 @@
         .buy-btn {
             background: #e74c3c;
             color: white;
-            text-decoration: none;
             padding: 8px 16px;
             border-radius: 5px;
+            text-decoration: none;
             display: inline-block;
         }
 
-        /* Contact Info */
+        /* Contact */
         .contact-info {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
             margin-top: 20px;
         }
 
         .contact-item {
             display: flex;
             align-items: center;
-            gap: 15px;
-            padding: 15px;
+            gap: 10px;
+            margin-bottom: 10px;
+            padding: 10px;
             background: #f8f9fa;
-            border-radius: 10px;
-        }
-
-        .contact-item i {
-            color: #3498db;
-            font-size: 1.2rem;
-            width: 30px;
+            border-radius: 5px;
         }
 
         /* Social Links */
@@ -192,12 +167,11 @@
             gap: 15px;
             justify-content: center;
             margin-top: 20px;
-            flex-wrap: wrap;
         }
 
         .social-icon {
-            width: 50px;
-            height: 50px;
+            width: 40px;
+            height: 40px;
             background: #3498db;
             color: white;
             border-radius: 50%;
@@ -205,37 +179,53 @@
             align-items: center;
             justify-content: center;
             text-decoration: none;
-            font-size: 1.3rem;
         }
 
         /* Admin Panel */
-        .admin-panel {
+        .admin-overlay {
             position: fixed;
             top: 0;
-            right: -400px;
-            width: 400px;
-            height: 100%;
-            background: white;
-            box-shadow: -5px 0 15px rgba(0,0,0,0.1);
-            transition: right 0.3s;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            display: none;
             z-index: 2000;
-            padding: 20px;
+        }
+
+        .admin-overlay.active {
+            display: block;
+        }
+
+        .admin-panel {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            width: 90%;
+            max-width: 500px;
+            max-height: 80vh;
             overflow-y: auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            z-index: 2001;
+            display: none;
         }
 
         .admin-panel.active {
-            right: 0;
+            display: block;
         }
 
         .close-admin {
             background: #e74c3c;
             color: white;
             border: none;
-            padding: 10px 20px;
+            padding: 8px 16px;
             border-radius: 5px;
             cursor: pointer;
             margin-bottom: 20px;
-            font-weight: bold;
         }
 
         .form-group {
@@ -246,7 +236,6 @@
             display: block;
             margin-bottom: 5px;
             font-weight: bold;
-            color: #333;
         }
 
         input, textarea {
@@ -261,41 +250,35 @@
             height: 100px;
         }
 
-        .form-btn {
+        .save-btn {
             background: #27ae60;
             color: white;
             border: none;
             padding: 12px;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 16px;
             width: 100%;
+            font-size: 16px;
             font-weight: bold;
             margin-top: 10px;
-        }
-
-        .form-btn:hover {
-            background: #219653;
         }
 
         /* Footer */
         footer {
             text-align: center;
             padding: 20px;
-            background: rgba(255, 255, 255, 0.1);
             color: white;
-            margin-top: 50px;
+            margin-top: 30px;
         }
 
         /* Responsive */
         @media (max-width: 768px) {
-            .admin-panel {
-                width: 100%;
-                right: -100%;
-            }
-            
             .books-grid {
                 grid-template-columns: 1fr;
+            }
+            
+            .admin-panel {
+                width: 95%;
             }
         }
     </style>
@@ -305,7 +288,7 @@
     <header>
         <div class="header-content">
             <div class="logo">Rabee Luqmann</div>
-            <button class="admin-btn" id="adminBtn">
+            <button class="edit-btn" onclick="showAdminPanel()">
                 <i class="fas fa-edit"></i> EDIT SITE
             </button>
         </div>
@@ -313,37 +296,33 @@
 
     <!-- Main Content -->
     <div class="main-content">
-        <!-- Hero Section -->
-        <section class="hero">
+        <!-- Hero -->
+        <section class="section hero">
             <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop" 
                  alt="Rabee Luqmann" class="profile-pic" id="profilePic">
             <h1 id="authorName">Rabee Luqmann</h1>
-            <p class="tagline" id="tagline">Author • Storyteller • Explorer of Hearts</p>
-            <div class="social-links" id="socialLinks">
-                <!-- Social links loaded by JavaScript -->
-            </div>
+            <p class="tagline" id="tagline">Author • Storyteller</p>
+            <div class="social-links" id="socialLinks"></div>
         </section>
 
-        <!-- About Section -->
-        <section class="section" id="about">
+        <!-- About -->
+        <section class="section">
             <h2>About Me</h2>
-            <div id="aboutContent">
-                <p>I am Rabee Luqmann, a passionate author who crafts stories that touch the deepest corners of the human heart.</p>
-                <p style="margin-top: 15px;">My writing explores love, longing, and the complex tapestry of human emotions across diverse cultures.</p>
+            <div id="aboutText">
+                <p>I am Rabee Luqmann, a passionate author who writes stories that touch hearts.</p>
+                <p style="margin-top: 10px;">Welcome to my official website!</p>
             </div>
         </section>
 
-        <!-- Books Section -->
-        <section class="section" id="books">
+        <!-- Books -->
+        <section class="section">
             <h2>My Books</h2>
-            <div id="booksContainer" class="books-grid">
-                <!-- Books loaded by JavaScript -->
-            </div>
+            <div id="booksContainer" class="books-grid"></div>
         </section>
 
-        <!-- Contact Section -->
-        <section class="section" id="contact">
-            <h2>Contact Me</h2>
+        <!-- Contact -->
+        <section class="section">
+            <h2>Contact</h2>
             <div class="contact-info">
                 <div class="contact-item">
                     <i class="fas fa-envelope"></i>
@@ -357,72 +336,87 @@
         </section>
     </div>
 
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Rabee Luqmann. All rights reserved.</p>
+    </footer>
+
     <!-- Admin Panel -->
+    <div class="admin-overlay" id="adminOverlay" onclick="hideAdminPanel()"></div>
+    
     <div class="admin-panel" id="adminPanel">
-        <button class="close-admin" id="closeAdmin">
+        <button class="close-admin" onclick="hideAdminPanel()">
             <i class="fas fa-times"></i> CLOSE
         </button>
         
-        <h2 style="color: #2c3e50; margin-bottom: 20px;">Website Editor</h2>
+        <h2 style="color: #2c3e50; margin-bottom: 20px;">Edit Your Website</h2>
         
         <!-- Profile Editor -->
         <div class="form-group">
-            <h3>Edit Profile</h3>
-            <label>Your Name:</label>
-            <input type="text" id="editName" placeholder="Enter your name">
+            <h3>Your Profile</h3>
+            <label>Name:</label>
+            <input type="text" id="editName">
             
             <label>Tagline:</label>
-            <input type="text" id="editTaglineInput" placeholder="Enter tagline">
+            <input type="text" id="editTagline">
             
             <label>Profile Photo:</label>
-            <input type="file" id="editProfilePhoto" accept="image/*">
+            <input type="file" id="editPhoto" accept="image/*">
             
-            <button class="form-btn" onclick="saveProfile()">Save Profile</button>
+            <button class="save-btn" onclick="saveProfile()">
+                <i class="fas fa-save"></i> SAVE PROFILE
+            </button>
         </div>
 
         <!-- Contact Editor -->
         <div class="form-group">
-            <h3>Edit Contact</h3>
+            <h3>Contact Info</h3>
             <label>Email:</label>
-            <input type="email" id="editEmail" placeholder="your@email.com">
+            <input type="email" id="editEmail">
             
             <label>Phone:</label>
-            <input type="text" id="editPhone" placeholder="Your phone number">
+            <input type="text" id="editPhone">
             
-            <button class="form-btn" onclick="saveContact()">Save Contact</button>
+            <button class="save-btn" onclick="saveContact()">
+                <i class="fas fa-save"></i> SAVE CONTACT
+            </button>
         </div>
 
-        <!-- Social Links Editor -->
+        <!-- Social Links -->
         <div class="form-group">
-            <h3>Edit Social Links</h3>
-            <label>Twitter:</label>
+            <h3>Social Links</h3>
+            <label>Twitter (optional):</label>
             <input type="url" id="editTwitter" placeholder="https://twitter.com/username">
             
-            <label>Instagram:</label>
+            <label>Instagram (optional):</label>
             <input type="url" id="editInstagram" placeholder="https://instagram.com/username">
             
-            <label>Amazon:</label>
+            <label>Amazon (optional):</label>
             <input type="url" id="editAmazon" placeholder="https://amazon.com/author/name">
             
-            <button class="form-btn" onclick="saveSocialLinks()">Save Social Links</button>
+            <button class="save-btn" onclick="saveSocial()">
+                <i class="fas fa-save"></i> SAVE SOCIAL
+            </button>
         </div>
 
-        <!-- Book Manager -->
+        <!-- Books Manager -->
         <div class="form-group">
             <h3>Add New Book</h3>
             <label>Book Title:</label>
-            <input type="text" id="newBookTitle" placeholder="Book title">
+            <input type="text" id="newTitle" placeholder="Book title">
             
             <label>Description:</label>
-            <textarea id="newBookDesc" placeholder="Book description"></textarea>
+            <textarea id="newDesc" placeholder="Book description"></textarea>
             
             <label>Cover Image:</label>
-            <input type="file" id="newBookCover" accept="image/*">
+            <input type="file" id="newCover" accept="image/*">
             
-            <label>Amazon Link:</label>
-            <input type="url" id="newBookLink" placeholder="https://amazon.com/dp/...">
+            <label>Amazon Link (optional):</label>
+            <input type="url" id="newLink" placeholder="https://amazon.com/dp/...">
             
-            <button class="form-btn" onclick="addBook()">Add Book</button>
+            <button class="save-btn" onclick="addBook()">
+                <i class="fas fa-plus"></i> ADD BOOK
+            </button>
         </div>
 
         <!-- Book List -->
@@ -433,28 +427,22 @@
 
         <!-- Backup -->
         <div class="form-group">
-            <h3>Backup & Restore</h3>
-            <button class="form-btn" onclick="backupData()">Backup All Data</button>
-            
-            <label style="margin-top: 15px;">Restore:</label>
-            <input type="file" id="restoreFile" accept=".json">
-            <button class="form-btn" onclick="restoreData()">Restore Data</button>
+            <h3>Backup</h3>
+            <button class="save-btn" onclick="backupData()" style="background: #3498db;">
+                <i class="fas fa-download"></i> BACKUP ALL DATA
+            </button>
         </div>
     </div>
 
-    <footer>
-        <p>&copy; 2024 Rabee Luqmann. All rights reserved.</p>
-    </footer>
-
     <script>
-        // SIMPLE WORKING VERSION
-        console.log("Website loaded - ready to edit!");
+        // SIMPLE GUARANTEED WORKING VERSION
+        console.log("Website loaded - ready!");
         
         // Default data
-        let siteData = {
+        let data = {
             name: "Rabee Luqmann",
-            tagline: "Author • Storyteller • Explorer of Hearts",
-            profilePic: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop",
+            tagline: "Author • Storyteller",
+            photo: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop",
             email: "contact@rabeeluqmann.com",
             phone: "+1 (555) 123-4567",
             twitter: "",
@@ -463,76 +451,84 @@
             books: [
                 {
                     title: "Bound by Destiny",
-                    desc: "A poignant portrayal of arranged marriage in India, blending tradition with modernity.",
+                    desc: "A poignant portrayal of arranged marriage in India.",
                     cover: "https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400&h=600&fit=crop",
                     link: "https://amazon.com"
                 },
                 {
-                    title: "Endorphin: The Ache of Wanting",
-                    desc: "A raw, lyrical narrative exploring longing, addiction, and obsessive emotion.",
+                    title: "Endorphin",
+                    desc: "Exploring longing, addiction, and obsessive emotion.",
                     cover: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=600&fit=crop",
                     link: "https://amazon.com"
                 }
             ]
         };
 
-        // Load saved data
-        function loadData() {
-            const saved = localStorage.getItem('rabeeluqmann_site');
-            if (saved) {
-                siteData = JSON.parse(saved);
-            }
+        // Load when page starts
+        window.onload = function() {
+            loadFromStorage();
             updatePage();
-            loadBooksList();
+            console.log("Page ready! Click EDIT SITE to start editing.");
+        };
+
+        // Load saved data
+        function loadFromStorage() {
+            const saved = localStorage.getItem('rabee_site');
+            if (saved) {
+                data = JSON.parse(saved);
+                console.log("Data loaded from storage");
+            }
         }
 
         // Save data
-        function saveData() {
-            localStorage.setItem('rabeeluqmann_site', JSON.stringify(siteData));
-            updatePage();
-            alert("Changes saved!");
+        function saveToStorage() {
+            localStorage.setItem('rabee_site', JSON.stringify(data));
+            console.log("Data saved");
         }
 
-        // Update page with current data
+        // Update page
         function updatePage() {
             // Profile
-            document.getElementById('authorName').textContent = siteData.name;
-            document.getElementById('tagline').textContent = siteData.tagline;
-            document.getElementById('profilePic').src = siteData.profilePic;
+            document.getElementById('authorName').textContent = data.name;
+            document.getElementById('tagline').textContent = data.tagline;
+            document.getElementById('profilePic').src = data.photo;
             
             // Contact
-            document.getElementById('emailText').textContent = siteData.email;
-            document.getElementById('phoneText').textContent = siteData.phone;
+            document.getElementById('emailText').textContent = data.email;
+            document.getElementById('phoneText').textContent = data.phone;
             
             // Social links
-            updateSocialLinks();
+            updateSocial();
             
             // Books
             updateBooks();
             
             // Fill edit forms
-            document.getElementById('editName').value = siteData.name;
-            document.getElementById('editTaglineInput').value = siteData.tagline;
-            document.getElementById('editEmail').value = siteData.email;
-            document.getElementById('editPhone').value = siteData.phone;
-            document.getElementById('editTwitter').value = siteData.twitter || '';
-            document.getElementById('editInstagram').value = siteData.instagram || '';
-            document.getElementById('editAmazon').value = siteData.amazon || '';
+            document.getElementById('editName').value = data.name;
+            document.getElementById('editTagline').value = data.tagline;
+            document.getElementById('editEmail').value = data.email;
+            document.getElementById('editPhone').value = data.phone;
+            document.getElementById('editTwitter').value = data.twitter;
+            document.getElementById('editInstagram').value = data.instagram;
+            document.getElementById('editAmazon').value = data.amazon;
+            
+            // Update book list
+            updateBookList();
         }
 
         // Update social links
-        function updateSocialLinks() {
+        function updateSocial() {
             const container = document.getElementById('socialLinks');
             let html = '';
             
-            if (siteData.twitter) {
-                html += `<a href="${siteData.twitter}" target="_blank" class="social-icon" style="background:#1da1f2;"><i class="fab fa-twitter"></i></a>`;
+            if (data.twitter) {
+                html += `<a href="${data.twitter}" target="_blank" class="social-icon" style="background:#1da1f2;"><i class="fab fa-twitter"></i></a>`;
             }
-            if (siteData.instagram) {
-                html += `<a href="${siteData.instagram}" target="_blank" class="social-icon" style="background:#e4405f;"><i class="fab fa-instagram"></i></a>`;
+            if (data.instagram) {
+                html += `<a href="${data.instagram}" target="_blank" class="social-icon" style="background:#e4405f;"><i class="fab fa-instagram"></i></a>`;
             }
-            if (siteData.amazon) {
-                html += `<a href="${siteData.amazon}" target="_blank" class="social-icon" style="background:#ff9900;"><i class="fab fa-amazon"></i></a>`;
+            if (data.amazon) {
+                html += `<a href="${data.amazon}" target="_blank" class="social-icon" style="background:#ff9900;"><i class="fab fa-amazon"></i></a>`;
             }
             
             container.innerHTML = html;
@@ -542,36 +538,36 @@
         function updateBooks() {
             const container = document.getElementById('booksContainer');
             
-            if (siteData.books.length === 0) {
+            if (data.books.length === 0) {
                 container.innerHTML = '<p>No books yet. Add your first book!</p>';
                 return;
             }
             
-            container.innerHTML = siteData.books.map(book => `
+            container.innerHTML = data.books.map(book => `
                 <div class="book-card">
                     <img src="${book.cover}" alt="${book.title}" class="book-cover">
                     <h3 class="book-title">${book.title}</h3>
-                    <p class="book-description">${book.desc}</p>
-                    <a href="${book.link}" target="_blank" class="buy-btn">Buy Now</a>
+                    <p class="book-desc">${book.desc}</p>
+                    ${book.link ? `<a href="${book.link}" target="_blank" class="buy-btn">Buy Now</a>` : ''}
                 </div>
             `).join('');
         }
 
-        // Load books list in admin panel
-        function loadBooksList() {
+        // Update book list in admin
+        function updateBookList() {
             const container = document.getElementById('bookList');
             
-            if (siteData.books.length === 0) {
+            if (data.books.length === 0) {
                 container.innerHTML = '<p>No books added yet.</p>';
                 return;
             }
             
-            container.innerHTML = siteData.books.map((book, index) => `
-                <div style="background:#f8f9fa; padding:10px; margin:5px 0; border-radius:5px;">
-                    <strong>${book.title}</strong>
+            container.innerHTML = data.books.map((book, index) => `
+                <div style="background:#f8f9fa; padding:10px; margin:5px 0; border-radius:5px; display:flex; justify-content:space-between; align-items:center;">
+                    <span><strong>${book.title}</strong></span>
                     <button onclick="deleteBook(${index})" 
-                            style="float:right; background:#e74c3c; color:white; border:none; padding:2px 8px; border-radius:3px; cursor:pointer;">
-                        X
+                            style="background:#e74c3c; color:white; border:none; padding:5px 10px; border-radius:3px; cursor:pointer;">
+                        Delete
                     </button>
                 </div>
             `).join('');
@@ -579,52 +575,73 @@
 
         // Delete book
         function deleteBook(index) {
-            if (confirm(`Delete "${siteData.books[index].title}"?`)) {
-                siteData.books.splice(index, 1);
-                saveData();
-                loadBooksList();
+            if (confirm(`Delete "${data.books[index].title}"?`)) {
+                data.books.splice(index, 1);
+                saveToStorage();
+                updatePage();
+                alert('Book deleted!');
             }
+        }
+
+        // === ADMIN PANEL FUNCTIONS ===
+        function showAdminPanel() {
+            console.log("Opening admin panel...");
+            document.getElementById('adminOverlay').classList.add('active');
+            document.getElementById('adminPanel').classList.add('active');
+        }
+
+        function hideAdminPanel() {
+            document.getElementById('adminOverlay').classList.remove('active');
+            document.getElementById('adminPanel').classList.remove('active');
         }
 
         // Save profile
         function saveProfile() {
-            siteData.name = document.getElementById('editName').value || siteData.name;
-            siteData.tagline = document.getElementById('editTaglineInput').value || siteData.tagline;
+            data.name = document.getElementById('editName').value;
+            data.tagline = document.getElementById('editTagline').value;
             
-            const fileInput = document.getElementById('editProfilePhoto');
-            if (fileInput.files[0]) {
+            const file = document.getElementById('editPhoto').files[0];
+            if (file) {
                 const reader = new FileReader();
                 reader.onload = function(e) {
-                    siteData.profilePic = e.target.result;
-                    saveData();
+                    data.photo = e.target.result;
+                    saveToStorage();
+                    updatePage();
+                    alert('Profile updated!');
                 };
-                reader.readAsDataURL(fileInput.files[0]);
+                reader.readAsDataURL(file);
             } else {
-                saveData();
+                saveToStorage();
+                updatePage();
+                alert('Profile updated!');
             }
         }
 
         // Save contact
         function saveContact() {
-            siteData.email = document.getElementById('editEmail').value || siteData.email;
-            siteData.phone = document.getElementById('editPhone').value || siteData.phone;
-            saveData();
+            data.email = document.getElementById('editEmail').value;
+            data.phone = document.getElementById('editPhone').value;
+            saveToStorage();
+            updatePage();
+            alert('Contact updated!');
         }
 
-        // Save social links
-        function saveSocialLinks() {
-            siteData.twitter = document.getElementById('editTwitter').value;
-            siteData.instagram = document.getElementById('editInstagram').value;
-            siteData.amazon = document.getElementById('editAmazon').value;
-            saveData();
+        // Save social
+        function saveSocial() {
+            data.twitter = document.getElementById('editTwitter').value;
+            data.instagram = document.getElementById('editInstagram').value;
+            data.amazon = document.getElementById('editAmazon').value;
+            saveToStorage();
+            updatePage();
+            alert('Social links updated!');
         }
 
         // Add book
         function addBook() {
-            const title = document.getElementById('newBookTitle').value;
-            const desc = document.getElementById('newBookDesc').value;
-            const link = document.getElementById('newBookLink').value;
-            const fileInput = document.getElementById('newBookCover');
+            const title = document.getElementById('newTitle').value;
+            const desc = document.getElementById('newDesc').value;
+            const link = document.getElementById('newLink').value;
+            const file = document.getElementById('newCover').files[0];
             
             if (!title || !desc) {
                 alert('Please enter title and description!');
@@ -638,95 +655,54 @@
                 cover: 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400&h=600&fit=crop'
             };
             
-            if (fileInput.files[0]) {
+            if (file) {
                 const reader = new FileReader();
                 reader.onload = function(e) {
                     newBook.cover = e.target.result;
-                    siteData.books.push(newBook);
-                    saveData();
-                    loadBooksList();
+                    data.books.push(newBook);
+                    saveToStorage();
+                    updatePage();
                     clearBookForm();
+                    alert('Book added!');
                 };
-                reader.readAsDataURL(fileInput.files[0]);
+                reader.readAsDataURL(file);
             } else {
-                siteData.books.push(newBook);
-                saveData();
-                loadBooksList();
+                data.books.push(newBook);
+                saveToStorage();
+                updatePage();
                 clearBookForm();
+                alert('Book added!');
             }
         }
 
         function clearBookForm() {
-            document.getElementById('newBookTitle').value = '';
-            document.getElementById('newBookDesc').value = '';
-            document.getElementById('newBookLink').value = '';
-            document.getElementById('newBookCover').value = '';
+            document.getElementById('newTitle').value = '';
+            document.getElementById('newDesc').value = '';
+            document.getElementById('newLink').value = '';
+            document.getElementById('newCover').value = '';
         }
 
         // Backup data
         function backupData() {
-            const dataStr = JSON.stringify(siteData, null, 2);
+            const dataStr = JSON.stringify(data, null, 2);
             const blob = new Blob([dataStr], {type: 'application/json'});
             const url = URL.createObjectURL(blob);
             
             const a = document.createElement('a');
             a.href = url;
-            a.download = 'rabeeluqmann_backup.json';
+            a.download = 'rabee_luqmann_backup.json';
+            document.body.appendChild(a);
             a.click();
+            document.body.removeChild(a);
             
-            alert('Backup downloaded!');
+            alert('Backup downloaded! Save this file safely.');
         }
 
-        // Restore data
-        function restoreData() {
-            const fileInput = document.getElementById('restoreFile');
-            const file = fileInput.files[0];
-            
-            if (!file) {
-                alert('Please select a backup file!');
-                return;
+        // Close with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                hideAdminPanel();
             }
-            
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                try {
-                    siteData = JSON.parse(e.target.result);
-                    saveData();
-                    loadBooksList();
-                    alert('Backup restored!');
-                    fileInput.value = '';
-                } catch (err) {
-                    alert('Invalid backup file!');
-                }
-            };
-            reader.readAsText(file);
-        }
-
-        // Admin panel functions
-        document.getElementById('adminBtn').onclick = function() {
-            document.getElementById('adminPanel').classList.add('active');
-            console.log("Admin panel opened");
-        };
-
-        document.getElementById('closeAdmin').onclick = function() {
-            document.getElementById('adminPanel').classList.remove('active');
-        };
-
-        // Close panel when clicking outside
-        document.addEventListener('click', function(event) {
-            const panel = document.getElementById('adminPanel');
-            const btn = document.getElementById('adminBtn');
-            
-            if (!panel.contains(event.target) && !btn.contains(event.target) && panel.classList.contains('active')) {
-                panel.classList.remove('active');
-            }
-        });
-
-        // Initialize
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log("Page loaded, initializing...");
-            loadData();
-            console.log("Data loaded, ready to edit!");
         });
     </script>
 </body>
